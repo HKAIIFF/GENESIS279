@@ -1,222 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAFT Agreement - AIF Token</title>
+    <title>GENESIS279 創世裂變方案 - AIF Token | HKAIIFF</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;800;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #3498db;
             --secondary: #8e44ad;
             --accent: #00ff9d;
+            --gold: #FFD700;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(26, 32, 44, 0.8);
         }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: var(--dark-bg);
             color: #ffffff;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(142, 68, 173, 0.1) 0%, transparent 20%);
+            line-height: 1.7;
         }
         
-        .logo-font {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            font-size: 2.5rem;
-            letter-spacing: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(52, 152, 219, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(0, 255, 157, 0.1) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+        
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 30px) scale(1.1); }
+        }
+        
+        .top-banner {
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            color: #000;
+            text-align: center;
+            padding: 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
             position: relative;
-            display: inline-block;
-            text-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
-            animation: logoGlow 3s ease-in-out infinite alternate;
-        }
-        
-        @keyframes logoGlow {
-            0% { text-shadow: 0 0 10px rgba(0, 255, 157, 0.3); }
-            100% { text-shadow: 0 0 25px rgba(0, 255, 157, 0.6), 0 0 35px rgba(52, 152, 219, 0.4); }
-        }
-        
-        .gradient-text {
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-        
-        .card {
-            background-color: rgba(26, 32, 44, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-        
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 255, 157, 0.2);
-            border-color: rgba(0, 255, 157, 0.3);
+            z-index: 100;
         }
         
         .navbar {
-            background-color: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            transition: all 0.3s ease;
-            border: none;
-            font-weight: 600;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        
-        .btn-secondary:hover {
-            background-color: rgba(0, 255, 157, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        .cyber-border {
-            position: relative;
-        }
-        
-        .cyber-border:after {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: linear-gradient(45deg, transparent 30%, var(--accent) 45%, var(--secondary) 55%, transparent 70%);
-            background-size: 200% 200%;
-            animation: borderGlow 5s linear infinite;
-            z-index: -1;
-            border-radius: 20px;
-        }
-        
-        @keyframes borderGlow {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-        
-        .ai-element {
-            position: absolute;
-            background-color: rgba(52, 152, 219, 0.1);
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            backdrop-filter: blur(5px);
-            padding: 10px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 12px;
-            color: var(--accent);
-            z-index: 3;
-            pointer-events: none;
-            box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
-        }
-        
-        .data-stream {
-            position: absolute;
-            height: 100px;
-            width: 2px;
-            background: linear-gradient(to bottom, transparent, var(--accent), var(--secondary), transparent);
-            z-index: 0;
-            animation: dataStream 2s linear infinite;
-            opacity: 0.3;
-        }
-        
-        @keyframes dataStream {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
-        }
-        
-        .section-title {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-        
-        .section-title.center:after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .status-pending { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
-        .status-processing { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
-        .status-approved { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
-        .status-rejected { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 1rem 0;
+            position: sticky;
             top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            z-index: 99;
         }
         
-        .step-number {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
         }
         
-        .step-card {
-            position: relative;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 157, 0.2);
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        .lang-switch {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-switch:hover {
+            background: var(--gold);
+            color: #000;
+            transform: scale(1.05);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
         }
         
         .mobile-menu {
@@ -224,153 +135,406 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 300px;
+            width: 100%;
+            max-width: 350px;
             height: 100vh;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 20px;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            padding: 2rem;
             transform: translateX(100%);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s;
+            overflow-y: auto;
         }
         
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
+        .mobile-menu.active { transform: translateX(0); }
         
         .mobile-menu-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: white;
             cursor: pointer;
-            color: var(--accent);
         }
         
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .logo-font {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* Enhanced Certificate Styles */
-        .certificate-container {
-            background: linear-gradient(135deg, #1a1f29, #0f172a);
-            border: 1px solid rgba(0, 255, 157, 0.3);
-            border-radius: 12px;
-            padding: 30px;
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-family: 'Times New Roman', serif;
-            color: #e0e0e0;
-            margin-bottom: 20px;
         }
         
-        .certificate-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 157, 0.3);
-        }
-        
-        .certificate-container::before {
-            content: "";
+        .hero::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(45deg, transparent 49%, rgba(0, 255, 157, 0.05) 50%, transparent 51%),
-                linear-gradient(-45deg, transparent 49%, rgba(0, 255, 157, 0.05) 50%, transparent 51%);
-            background-size: 30px 30px;
-            opacity: 0.3;
-            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
         }
         
-        .certificate-content {
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+        
+        .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));
+            border: 2px solid var(--gold);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+        }
+        
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gold), #FFA500, var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% auto;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin-bottom: 2rem;
             line-height: 1.6;
         }
         
-        .certificate-header {
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid rgba(0, 255, 157, 0.3);
         }
         
-        .certificate-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            color: var(--accent);
-            text-transform: uppercase;
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold);
+            font-family: 'Orbitron', sans-serif;
+            display: block;
         }
         
-        .certificate-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            letter-spacing: 1px;
-        }
-        
-        .certificate-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--accent), transparent);
-            margin: 25px 0;
-        }
-        
-        .certificate-note {
-            font-style: italic;
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.2);
-        }
-        
-        .certificate-signature {
-            margin-top: 40px;
-            text-align: right;
-        }
-        
-        .certificate-signature-name {
-            font-weight: bold;
-            color: var(--accent);
-            margin-top: 40px;
-            position: relative;
-            display: inline-block;
-            padding-right: 10px;
-            font-size: 1.1rem;
-        }
-        
-        .certificate-signature-name::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            right: 0;
-            width: 200px;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .certificate-body {
+        .stat-label {
             font-size: 1rem;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            color: #000;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.6);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-5px);
+        }
+        
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--gold), #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #999;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        
+        .card-text {
+            font-size: 1.05rem;
+            color: #ccc;
             line-height: 1.8;
         }
         
-        .certificate-modal {
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+        
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .benefit-item {
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 215, 0, 0.05);
+            border-left: 4px solid var(--gold);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .benefit-number {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-right: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .pricing-table {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .table th {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));
+            padding: 1.5rem;
+            font-weight: 800;
+            text-align: left;
+            font-size: 1.1rem;
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        .table td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            font-size: 1rem;
+        }
+        
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .table tr:hover {
+            background: rgba(255, 215, 0, 0.05);
+        }
+        
+        .highlight {
+            color: var(--gold);
+            font-weight: 700;
+        }
+        
+        .tier-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .tier-genesis {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 165, 0, 0.3));
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+        
+        .tier-gold {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            color: rgba(255, 215, 0, 0.9);
+        }
+        
+        .process-steps {
+            display: grid;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            border-color: var(--gold);
+            transform: translateX(10px);
+        }
+        
+        .step-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold);
+            font-family: 'Orbitron', sans-serif;
+            min-width: 80px;
+        }
+        
+        .step-content h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+        }
+        
+        .step-content p {
+            font-size: 1.05rem;
+            color: #ccc;
+            line-height: 1.8;
+        }
+        
+        .example-box {
+            background: rgba(0, 255, 157, 0.05);
+            border: 2px solid var(--accent);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .example-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -378,1401 +542,1020 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            align-items: center;
+            z-index: 9999;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
+            padding: 2rem;
         }
         
-        .certificate-modal-content {
-            max-width: 800px;
+        .modal.active { display: flex; }
+        
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
             max-height: 90vh;
-            overflow: auto;
+            overflow-y: auto;
             position: relative;
         }
         
-        .certificate-modal-close {
+        .modal-close {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            color: var(--accent);
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-        
-        .certificate-modal-close:hover {
-            background: rgba(0, 255, 157, 0.2);
-        }
-        
-        /* New Layout Adjustments */
-        .certificate-section {
-            margin-bottom: 40px;
-        }
-        
-        .certificate-section h4 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(0, 255, 157, 0.2);
-        }
-        
-        .certificate-full-view {
-            padding: 25px;
-            margin-top: 25px;
-        }
-        
-        .certificate-details {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 25px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .certificate-tabs {
-            display: flex;
-            margin-bottom: 30px;
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 8px;
-            padding: 5px;
-        }
-
-        .certificate-tab {
-            flex: 1;
-            padding: 12px 20px;
-            text-align: center;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .certificate-tab.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            background: none;
+            border: none;
             color: white;
+            cursor: pointer;
+            transition: color 0.3s;
         }
-
-        .certificate-tab:not(.active) {
-            color: #aaa;
-        }
-
-        .certificate-tab:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .certificate-content-wrapper {
-            display: none;
-        }
-
-        .certificate-content-wrapper.active {
-            display: block;
-        }
-
-        .business-reg-cert {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            padding: 25px;
+        
+        .modal-close:hover { color: var(--gold); }
+        
+        .wallet-address {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
             border-radius: 10px;
-            margin: 15px 0;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .business-reg-header {
-            text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .business-reg-title {
-            font-size: 1.4rem;
-            color: #3b82f6;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .business-reg-number {
-            font-family: monospace;
-            font-size: 1.1rem;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .business-reg-body {
+            font-family: 'Courier New', monospace;
             font-size: 0.95rem;
-            line-height: 1.6;
+            word-break: break-all;
+            border: 1px solid var(--gold);
+            color: var(--accent);
+            font-weight: 700;
         }
-
-        .reg-field {
-            margin-bottom: 15px;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
+        
+        .currency-option {
+            display: block;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
         }
-
-        .reg-field-label {
-            font-size: 0.85rem;
-            color: #888;
-            margin-bottom: 5px;
+        
+        .currency-option:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: var(--gold);
+            transform: translateX(5px);
         }
-
-        .reg-field-value {
-            font-weight: 500;
-            color: #e0e0e0;
+        
+        .footer {
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+        
+        .lang-zh, .lang-en { display: none; }
+        .lang-zh.active, .lang-en.active { display: block; }
+        
+        @media (max-width: 1024px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .hero-title { font-size: 3rem; }
+            .section-title { font-size: 2.5rem; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .mobile-menu { display: block; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .hero-stats { gap: 1.5rem; }
+            .stat-number { font-size: 2rem; }
+            .cta-buttons { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+            .step { flex-direction: column; }
+            .step-number { min-width: auto; }
         }
     </style>
 </head>
 <body>
-    <!-- AI Elements -->
-    <div class="ai-element" style="top: 120px; left: 10%;">
-        SAFT_ID: LEGAL-7840 <br>
-        STATUS: ACTIVE <br>
-        // Smart Contract Verification
+    <div class="animated-bg"></div>
+    
+    <div class="top-banner">
+        <span class="lang-zh active">🚀 GENESIS279 創世裂變方案 - 前10,000名限定！立即鎖定9大專屬權益</span>
+        <span class="lang-en">🚀 GENESIS279 - Limited to First 10,000! Lock in 9 Exclusive Benefits Now</span>
     </div>
     
-    <div class="ai-element" style="bottom: 150px; right: 15%;">
-        WALLET_CHECK: RUNNING <br>
-        HASH: 0x71A9B3...F7E <br>
-        // Compliance Scan
-    </div>
-    
-    <!-- Data streams -->
-    <div class="data-stream" style="left: 20%; animation-delay: 0s;"></div>
-    <div class="data-stream" style="left: 40%; animation-delay: 0.5s;"></div>
-    <div class="data-stream" style="left: 60%; animation-delay: 1s;"></div>
-    <div class="data-stream" style="left: 80%; animation-delay: 1.5s;"></div>
-
-    <!-- Navigation -->
-    <nav class="navbar fixed w-full z-50 px-4 py-3">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="index.html" class="flex items-center">
-                <div class="logo-font">HKAIFM</div>
-            </a>
-            <div class="hidden md:flex space-x-8 desktop-nav">
-                <a href="index.html" class="hover:text-blue-400 transition">Home</a>
-                <a href="index.html#marketplace" class="hover:text-blue-400 transition">Marketplace</a>
-                <a href="index.html#tokenomics" class="hover:text-blue-400 transition">Tokenomics</a>
-                <a href="#saft" class="text-blue-400 transition">SAFT</a>
-                <a href="#wallet" class="hover:text-blue-400 transition">Verification</a>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">GENESIS279</div>
+            <div class="nav-links">
+                <a href="#about" class="lang-zh active">核心邏輯</a>
+                <a href="#about" class="lang-en">Core Logic</a>
+                <a href="#benefits" class="lang-zh active">會員權益</a>
+                <a href="#benefits" class="lang-en">Benefits</a>
+                <a href="#rewards" class="lang-zh active">獎勵機制</a>
+                <a href="#rewards" class="lang-en">Rewards</a>
+                <a href="#pricing" class="lang-zh active">階梯定價</a>
+                <a href="#pricing" class="lang-en">Pricing</a>
+                <a href="#process" class="lang-zh active">參與流程</a>
+                <a href="#process" class="lang-en">Process</a>
+                <button class="lang-switch" id="langBtn" onclick="toggleLanguage()">EN</button>
             </div>
-            <div class="flex items-center space-x-4">
-                <div class="login-container relative">
-                    <a href="index.html#login" class="btn-primary px-6 py-2 rounded-full text-sm">Sign In</a>
-                </div>
-                
-                <button class="md:hidden text-white mobile-menu-btn">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-close">
-            <i class="fas fa-times"></i>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+        <div style="margin-top: 3rem;">
+            <a href="#about" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-zh active">核心邏輯</a>
+            <a href="#about" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-en">Core Logic</a>
+            
+            <a href="#benefits" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-zh active">會員權益</a>
+            <a href="#benefits" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-en">Benefits</a>
+            
+            <a href="#rewards" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-zh active">獎勵機制</a>
+            <a href="#rewards" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-en">Rewards</a>
+            
+            <a href="#pricing" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-zh active">階梯定價</a>
+            <a href="#pricing" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-en">Pricing</a>
+            
+            <a href="#process" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-zh active">參與流程</a>
+            <a href="#process" style="display: block; padding: 1rem; color: white; text-decoration: none; font-size: 1.2rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);" class="lang-en">Process</a>
+            
+            <button class="lang-switch" id="langBtnMobile" onclick="toggleLanguage()" style="width: 100%; margin-top: 2rem;">EN</button>
+        </div>
+    </div>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="lang-zh active">🔥 限量10,000個創世名額</span>
+                <span class="lang-en">🔥 Limited 10,000 Genesis Spots</span>
+            </div>
+            <h1 class="hero-title">GENESIS279</h1>
+            <p class="hero-subtitle">
+                <span class="lang-zh active">279創世裂變方案 - 利用身份稀缺性與二二複製回本機制，驅動15萬會員裂變</span>
+                <span class="lang-en">279 Genesis Viral Plan - Leveraging Identity Scarcity & 2x2 Payback Mechanism to Drive 150K Member Growth</span>
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">2</span>
+                    <div class="stat-label">
+                        <span class="lang-zh active">二二複製回本</span>
+                        <span class="lang-en">2x2 Payback</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">7</span>
+                    <div class="stat-label">
+                        <span class="lang-zh active">七人成團獎勵</span>
+                        <span class="lang-en">Team of 7 Rewards</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">9</span>
+                    <div class="stat-label">
+                        <span class="lang-zh active">九大專屬權益</span>
+                        <span class="lang-en">9 Exclusive Benefits</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="openCryptoModal()">
+                    <i class="fas fa-rocket"></i>
+                    <span class="lang-zh active">立即加入 GENESIS279</span>
+                    <span class="lang-en">Join GENESIS279 Now</span>
+                </button>
+                <a href="#about" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="lang-zh active">了解更多</span>
+                    <span class="lang-en">Learn More</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(255, 215, 0, 0.1); border-radius: 20px; border: 2px solid var(--gold);">
+                <p style="font-size: 1.1rem; color: var(--gold); font-weight: 700;">
+                    <span class="lang-zh active">🎯 當前已有 <span id="participating">350</span> 位用戶參與</span>
+                    <span class="lang-en">🎯 Currently <span id="participating-en">350</span> Users Participating</span>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="lang-zh active">核心邏輯：2-7-9</span>
+                <span class="lang-en">Core Logic: 2-7-9</span>
+            </h2>
+            <p class="section-subtitle">
+                <span class="lang-zh active">三位一體的創世裂變機制，打造可持續的生態增長引擎</span>
+                <span class="lang-en">Trinity Genesis Viral Mechanism - Building a Sustainable Ecosystem Growth Engine</span>
+            </p>
         </div>
         
-        <div class="mt-12 flex flex-col space-y-6">
-            <a href="index.html" class="text-xl hover:text-blue-400 transition">Home</a>
-            <a href="index.html#marketplace" class="text-xl hover:text-blue-400 transition">Marketplace</a>
-            <a href="index.html#tokenomics" class="text-xl hover:text-blue-400 transition">Tokenomics</a>
-            <a href="#saft" class="text-xl text-blue-400 transition">SAFT</a>
-            <a href="#wallet" class="text-xl hover:text-blue-400 transition">Verification</a>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center pt-20">
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6">Token <span class="gradient-text">SAFT Agreement</span></h1>
-                <p class="text-xl text-gray-300 mb-8">
-                    Legal framework for participation in the AIF Token ecosystem. Complete your wallet verification to access the AI film marketplace.
-                </p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#saft" class="btn-primary px-8 py-3 rounded-full font-medium text-center">
-                        View SAFT
-                    </a>
-                    <a href="#wallet" class="btn-secondary px-8 py-3 rounded-full font-medium text-center">
-                        Verify Wallet
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SAFT Agreement Section -->
-    <section id="saft" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">SAFT Agreement</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Simple Agreement for Future Tokens - Legal framework for AIF Token investment
+        <div class="grid grid-3">
+            <div class="card">
+                <div class="card-icon">2️⃣</div>
+                <h3 class="card-title">
+                    <span class="lang-zh active">二二複製</span>
+                    <span class="lang-en">2x2 Replication</span>
+                </h3>
+                <p class="card-text">
+                    <span class="lang-zh active">每個會員的核心回本任務。邀請2位新會員，啟動20%/80%的快速回本獎勵，消除新用戶進場阻力，實現零成本獲取會員資格。</span>
+                    <span class="lang-en">Core payback mission for each member. Invite 2 new members to activate 20%/80% fast payback rewards, eliminating entry barriers for new users to achieve zero-cost membership qualification.</span>
                 </p>
             </div>
             
-            <!-- Agreement Overview -->
-            <div class="card rounded-xl overflow-hidden cyber-border mb-12">
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-6">📋 Agreement Overview</h3>
-                    <div class="grid grid-cols-1 gap-8">
-                        <!-- Certificate Section -->
-                        <div class="certificate-section">
-                            <h4 class="text-lg font-bold mb-4 text-blue-400">Company Registration Certificates</h4>
-                            
-                            <!-- Certificate Tabs -->
-                            <div class="certificate-tabs">
-                                <div class="certificate-tab active" data-cert="incorporation-main">
-                                    <i class="fas fa-certificate mr-2"></i>
-                                    Main Certificate
-                                </div>
-                                <div class="certificate-tab" data-cert="incorporation-academy">
-                                    <i class="fas fa-graduation-cap mr-2"></i>
-                                    Academy Certificate
-                                </div>
-                                <div class="certificate-tab" data-cert="business1">
-                                    <i class="fas fa-building mr-2"></i>
-                                    Business Registration (Market)
-                                </div>
-                                <div class="certificate-tab" data-cert="business2">
-                                    <i class="fas fa-film mr-2"></i>
-                                    Business Registration (Festival)
-                                </div>
-                            </div>
-
-                            <!-- Main Certificate of Incorporation -->
-                            <div class="certificate-content-wrapper active" id="incorporation-main">
-                                <div class="certificate-container" data-modal="incorporation-main">
-                                    <div class="certificate-content">
-                                        <div class="certificate-header">
-                                            <div class="certificate-title">公司註冊證明書</div>
-                                            <div class="certificate-subtitle">CERTIFICATE OF INCORPORATION</div>
-                                        </div>
-                                        
-                                        <div class="mb-4">
-                                            <div class="text-center mb-6">
-                                                <div class="font-mono text-lg">編號 77536113</div>
-                                                <div class="text-sm text-gray-400 mt-1">No. 77536113</div>
-                                            </div>
-                                            
-                                            <div class="text-center font-bold mb-6">
-                                                <div>公司註冊處</div>
-                                                <div>COMPANIES REGISTRY</div>
-                                            </div>
-                                            
-                                            <div class="certificate-body">
-                                                <div class="mb-6">
-                                                    <div class="mb-4">本人謹此證明</div>
-                                                    <div class="mb-4">I hereby certify that</div>
-                                                    
-                                                    <div class="text-center font-bold mb-6">
-                                                        <div>Hong Kong AI International Film Festival Limited</div>
-                                                        <div>香港人工智能國際電影節協會有限公司</div>
-                                                    </div>
-                                                    
-                                                    <div class="mb-4">
-                                                        <div>於本日根據香港法例第622章《公司條例》</div>
-                                                        <div>is this day incorporated in Hong Kong under the Companies Ordinance</div>
-                                                        <div>(Chapter 622 of the Laws of Hong Kong), and that this company is</div>
-                                                    </div>
-                                                    
-                                                    <div class="text-center font-bold mb-8">
-                                                        <div>有限公司。</div>
-                                                        <div>a limited company.</div>
-                                                    </div>
-                                                    
-                                                    <div class="text-center mb-8">
-                                                        <div>本證明書於二〇二四年十二月三十一日發出。</div>
-                                                        <div>Issued on 31 December 2024.</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="certificate-divider"></div>
-                                            
-                                            <div class="certificate-signature">
-                                                <div>香港特別行政區公司註冊處處長鄧婉雯</div>
-                                                <div>Miss Helen TANG</div>
-                                                <div class="certificate-signature-name">Registrar of Companies</div>
-                                                <div>Hong Kong Special Administrative Region</div>
-                                            </div>
-                                            
-                                            <div class="certificate-note">
-                                                註 Note：<br>
-                                                公司名稱獲公司註冊處註冊，並不表示獲授予該公司名稱或其任何部分的商標權或任何其他知識產權。<br>
-                                                Registration of a company name with the Companies Registry does not confer any trade mark rights or any other intellectual property rights in respect of the company name or any part thereof.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-4 text-center">
-                                    <button class="btn-primary px-6 py-2 rounded-full text-sm" data-modal-btn="incorporation-main">
-                                        <i class="fas fa-expand mr-1"></i>View Full Certificate
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Academy Certificate of Incorporation -->
-                            <div class="certificate-content-wrapper" id="incorporation-academy">
-                                <div class="certificate-container" data-modal="incorporation-academy">
-                                    <div class="certificate-content">
-                                        <div class="certificate-header">
-                                            <div class="certificate-title">公司註冊證明書</div>
-                                            <div class="certificate-subtitle">CERTIFICATE OF INCORPORATION</div>
-                                        </div>
-                                        
-                                        <div class="mb-4">
-                                            <div class="text-center mb-6">
-                                                <div class="font-mono text-lg">編號 77960839</div>
-                                                <div class="text-sm text-gray-400 mt-1">No. 77960839</div>
-                                            </div>
-                                            
-                                            <div class="text-center font-bold mb-6">
-                                                <div>公司註冊處</div>
-                                                <div>COMPANIES REGISTRY</div>
-                                            </div>
-                                            
-                                            <div class="certificate-body">
-                                                <div class="mb-6">
-                                                    <div class="mb-4">本人謹此證明</div>
-                                                    <div class="mb-4">I hereby certify that</div>
-                                                    
-                                                    <div class="text-center font-bold mb-6">
-                                                        <div>Hong Kong AI Film Academy Limited</div>
-                                                    </div>
-                                                    
-                                                    <div class="mb-4">
-                                                        <div>於本日根據香港法例第622章《公司條例》</div>
-                                                        <div>is this day incorporated in Hong Kong under the Companies Ordinance</div>
-                                                        <div>(Chapter 622 of the Laws of Hong Kong), and that this company is</div>
-                                                    </div>
-                                                    
-                                                    <div class="text-center font-bold mb-8">
-                                                        <div>有限公司。</div>
-                                                        <div>a limited company.</div>
-                                                    </div>
-                                                    
-                                                    <div class="text-center mb-8">
-                                                        <div>本證明書於二〇二五年四月三日發出。</div>
-                                                        <div>Issued on 3 April 2025.</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="certificate-divider"></div>
-                                            
-                                            <div class="certificate-signature">
-                                                <div>香港特別行政區公司註冊處處長楊善</div>
-                                                <div>Ms Majestic YEUNG</div>
-                                                <div class="certificate-signature-name">Registrar of Companies</div>
-                                                <div>Hong Kong Special Administrative Region</div>
-                                            </div>
-                                            
-                                            <div class="certificate-note">
-                                                註 Note：<br>
-                                                公司名稱獲公司註冊處註冊，並不表示獲授予該公司名稱或其任何部分的商標權或任何其他知識產權。<br>
-                                                Registration of a company name with the Companies Registry does not confer any trade mark rights or any other intellectual property rights in respect of the company name or any part thereof.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-4 text-center">
-                                    <button class="btn-primary px-6 py-2 rounded-full text-sm" data-modal-btn="incorporation-academy">
-                                        <i class="fas fa-expand mr-1"></i>View Full Certificate
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Business Registration Certificate 1 (Market) -->
-                            <div class="certificate-content-wrapper" id="business1">
-                                <div class="business-reg-cert" data-modal="business1">
-                                    <div class="business-reg-header">
-                                        <div class="business-reg-title">BUSINESS REGISTRATION CERTIFICATE</div>
-                                        <div class="business-reg-number">Certificate No. 77536113-002-12-24-7</div>
-                                    </div>
-                                    
-                                    <div class="business-reg-body">
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">業務 / 法團所用名稱 (Name of Business/Corporation)</div>
-                                            <div class="reg-field-value">香港人工智能國際電影節協會有限公司</div>
-                                            <div class="reg-field-value">HONG KONG AI INTERNATIONAL FILM FESTIVAL LIMITED</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">業務 / 分行名稱 (Business/Branch Name)</div>
-                                            <div class="reg-field-value">香港人工智能電影市場</div>
-                                            <div class="reg-field-value">HONG KONG ARTIFICIAL INTELLIGENCE FILM MARKET</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">地址 (Address)</div>
-                                            <div class="reg-field-value">FLAT D07 8/F</div>
-                                            <div class="reg-field-value">KAI TAK FTY BUILDING</div>
-                                            <div class="reg-field-value">NO.99 KING FUK ST SANPOKONG KL</div>
-                                        </div>
-                                        
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div class="reg-field">
-                                                <div class="reg-field-label">生效日期 (Date of Commencement)</div>
-                                                <div class="reg-field-value">22/01/2025</div>
-                                            </div>
-                                            
-                                            <div class="reg-field">
-                                                <div class="reg-field-label">屆滿日期 (Date of Expiry)</div>
-                                                <div class="reg-field-value">30/12/2025</div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">業務性質 (Nature of Business)</div>
-                                            <div class="reg-field-value">人工智能算法，技術，產品和電影節及電影業相關的活動和產品</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">法律地位 (Status)</div>
-                                            <div class="reg-field-value">BODY CORPORATE</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">登記證號碼 (Certificate No.)</div>
-                                            <div class="reg-field-value">77536113-002-12-24-7</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">登記費及徵費 (Fee and Levy)</div>
-                                            <div class="reg-field-value">$80 (登記費 FEE = $80) (徵費 LEVY = $0)</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-4 text-center">
-                                    <button class="btn-primary px-6 py-2 rounded-full text-sm" data-modal-btn="business1">
-                                        <i class="fas fa-expand mr-1"></i>View Full Certificate
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Business Registration Certificate 2 (Festival) -->
-                            <div class="certificate-content-wrapper" id="business2">
-                                <div class="business-reg-cert" data-modal="business2">
-                                    <div class="business-reg-header">
-                                        <div class="business-reg-title">BUSINESS REGISTRATION CERTIFICATE</div>
-                                        <div class="business-reg-number">Certificate No. 77536113-001-12-24-6</div>
-                                    </div>
-                                    
-                                    <div class="business-reg-body">
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">業務 / 法團所用名稱 (Name of Business/Corporation)</div>
-                                            <div class="reg-field-value">香港人工智能國際電影節協會有限公司</div>
-                                            <div class="reg-field-value">HONG KONG AI INTERNATIONAL FILM FESTIVAL LIMITED</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">業務 / 分行名稱 (Business/Branch Name)</div>
-                                            <div class="reg-field-value">香港人工智能國際電影節協會</div>
-                                            <div class="reg-field-value">HONG KONG ARTIFICIAL INTERNATIONAL FILM FESTIVAL ASSOCIATION</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">地址 (Address)</div>
-                                            <div class="reg-field-value">RM D07 8/F</div>
-                                            <div class="reg-field-value">KAI TAK FTY BUILDING</div>
-                                            <div class="reg-field-value">NO. 99 KING FUK ST SANPOKONG KL</div>
-                                        </div>
-                                        
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div class="reg-field">
-                                                <div class="reg-field-label">生效日期 (Date of Commencement)</div>
-                                                <div class="reg-field-value">22/01/2025</div>
-                                            </div>
-                                            
-                                            <div class="reg-field">
-                                                <div class="reg-field-label">屆滿日期 (Date of Expiry)</div>
-                                                <div class="reg-field-value">30/12/2025</div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">業務性質 (Nature of Business)</div>
-                                            <div class="reg-field-value">人工智能算法，技術，產品和電影節及電影業相關的活動和產品</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">法律地位 (Status)</div>
-                                            <div class="reg-field-value">BODY CORPORATE</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">登記證號碼 (Certificate No.)</div>
-                                            <div class="reg-field-value">77536113-001-12-24-6</div>
-                                        </div>
-                                        
-                                        <div class="reg-field">
-                                            <div class="reg-field-label">登記費及徵費 (Fee and Levy)</div>
-                                            <div class="reg-field-value">$80 (登記費 FEE = $80) (徵費 LEVY = $0)</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-4 text-center">
-                                    <button class="btn-primary px-6 py-2 rounded-full text-sm" data-modal-btn="business2">
-                                        <i class="fas fa-expand mr-1"></i>View Full Certificate
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Company and Token Info -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div>
-                                <h4 class="text-lg font-bold mb-4 text-blue-400">Issuer Information</h4>
-                                <div class="space-y-3">
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Primary Company Name (English)</div>
-                                        <div class="font-medium">HONG KONG AI INTERNATIONAL FILM FESTIVAL LIMITED</div>
-                                    </div>
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Primary Company Name (Chinese)</div>
-                                        <div class="font-medium">香港人工智能國際電影節協會有限公司</div>
-                                    </div>
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Primary Incorporation No.</div>
-                                        <div class="font-medium font-mono">77536113</div>
-                                    </div>
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Academy Incorporation No.</div>
-                                        <div class="font-medium font-mono">77960839</div>
-                                    </div>
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Business Registration No.</div>
-                                        <div class="font-medium font-mono">77536113-001-12-24-6</div>
-                                    </div>
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Jurisdiction</div>
-                                        <div class="font-medium">Hong Kong SAR</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <h4 class="text-lg font-bold mb-4 text-purple-400">Token Information</h4>
-                                <div class="space-y-3">
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Token Name</div>
-                                        <div class="font-medium">Hong Kong AI International Film Festival Token</div>
-                                    </div>
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Token Symbol</div>
-                                        <div class="font-medium">AIF</div>
-                                    </div>
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Total Supply</div>
-                                        <div class="font-medium">10,000,000,000 AIF</div>
-                                    </div>
-                                    <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                        <div class="text-sm text-gray-400 mb-1">Private Sale Price</div>
-                                        <div class="font-medium text-blue-400">$0.05 per AIF</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Investment Terms -->
-            <div class="card rounded-xl overflow-hidden cyber-border mb-12">
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-6">💰 Investment Terms</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-lg font-bold mb-4 text-blue-400">Accepted Cryptocurrencies</h4>
-                            <div class="space-y-3">
-                                <div class="flex items-center p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                    <i class="fab fa-ethereum text-2xl text-blue-400 mr-3"></i>
-                                    <div>
-                                        <div class="font-medium">USDT (Tether)</div>
-                                        <div class="text-sm text-gray-400">ERC-20 Standard</div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                    <i class="fab fa-ethereum text-2xl text-blue-400 mr-3"></i>
-                                    <div>
-                                        <div class="font-medium">USDC (USD Coin)</div>
-                                        <div class="text-sm text-gray-400">ERC-20 Standard</div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                    <i class="fab fa-ethereum text-2xl text-blue-400 mr-3"></i>
-                                    <div>
-                                        <div class="font-medium">ETH (Ethereum)</div>
-                                        <div class="text-sm text-gray-400">Native Token</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-lg font-bold mb-4 text-purple-400">Vesting Schedule</h4>
-                            <div class="space-y-4">
-                                <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span class="font-medium">Cliff Period</span>
-                                        <span class="text-blue-400 font-bold">6 Months</span>
-                                    </div>
-                                    <div class="text-sm text-gray-400">No token release during cliff period</div>
-                                </div>
-                                <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span class="font-medium">Vesting Period</span>
-                                        <span class="text-blue-400 font-bold">24 Months</span>
-                                    </div>
-                                    <div class="text-sm text-gray-400">Linear release after cliff period</div>
-                                </div>
-                                <div class="p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span class="font-medium">Monthly Release</span>
-                                        <span class="text-blue-400 font-bold">4.17%</span>
-                                    </div>
-                                    <div class="text-sm text-gray-400">Equal monthly distribution</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Risk Disclosure -->
-            <div class="card rounded-xl overflow-hidden cyber-border mb-12">
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-6">⚠️ Risk Disclosure</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-4">
-                            <div class="p-4 bg-red-900 bg-opacity-30 border border-red-500 border-opacity-50 rounded-lg">
-                                <h4 class="font-bold text-red-400 mb-2">
-                                    <i class="fas fa-exclamation-triangle mr-2"></i>
-                                    Total Loss Risk
-                                </h4>
-                                <p class="text-sm text-gray-300">
-                                    You may lose your entire investment
-                                </p>
-                            </div>
-                            <div class="p-4 bg-yellow-900 bg-opacity-30 border border-yellow-500 border-opacity-50 rounded-lg">
-                                <h4 class="font-bold text-yellow-400 mb-2">
-                                    <i class="fas fa-code mr-2"></i>
-                                    Technology Risk
-                                </h4>
-                                <p class="text-sm text-gray-300">
-                                    Smart contract vulnerabilities and blockchain risks
-                                </p>
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="p-4 bg-orange-900 bg-opacity-30 border border-orange-500 border-opacity-50 rounded-lg">
-                                <h4 class="font-bold text-orange-400 mb-2">
-                                    <i class="fas fa-balance-scale mr-2"></i>
-                                    Regulatory Risk
-                                </h4>
-                                <p class="text-sm text-gray-300">
-                                    Changes in regulations may affect token value
-                                </p>
-                            </div>
-                            <div class="p-4 bg-purple-900 bg-opacity-30 border border-purple-500 border-opacity-50 rounded-lg">
-                                <h4 class="font-bold text-purple-400 mb-2">
-                                    <i class="fas fa-chart-line mr-2"></i>
-                                    Market Risk
-                                </h4>
-                                <p class="text-sm text-gray-300">
-                                    High volatility in cryptocurrency markets
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6 p-4 bg-gray-800 bg-opacity-60 rounded-lg">
-                        <h4 class="font-bold text-red-400 mb-2">
-                            🚨 Important Notice
-                        </h4>
-                        <p class="text-sm text-gray-300">
-                            This is a legally binding agreement. Please read all terms carefully and seek professional legal advice if necessary. Investment involves substantial risks.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Download Links -->
-            <div class="text-center">
-                <div class="inline-flex flex-wrap justify-center gap-4">
-                    <a href="mailto:legal@aif.market" class="btn-primary px-8 py-3 rounded-full font-medium text-center">
-                        <i class="fas fa-download mr-2"></i>
-                        Request SAFT Document
-                    </a>
-                    <a href="mailto:legal@aif.market" class="btn-secondary px-8 py-3 rounded-full font-medium text-center">
-                        <i class="fas fa-question-circle mr-2"></i>
-                        Legal Consultation
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Wallet Verification Section -->
-    <section id="wallet" class="py-20 bg-gray-900 bg-opacity-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">Wallet Verification</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Secure verification process to ensure investment fund safety and compliance
+            <div class="card">
+                <div class="card-icon">7️⃣</div>
+                <h3 class="card-title">
+                    <span class="lang-zh active">七人成團</span>
+                    <span class="lang-en">Team of 7</span>
+                </h3>
+                <p class="card-text">
+                    <span class="lang-zh active">每個會員的團隊進階任務。構成1+2+4的7人團隊，啟動團隊幫扶獎勵，獲得直屬下線未來所獲快速回本獎總額的10%作為持續被動收入。</span>
+                    <span class="lang-en">Team advancement mission for each member. Build a 1+2+4 team of 7 to activate team support rewards, earning 10% of your direct referrals' future fast payback rewards as ongoing passive income.</span>
                 </p>
             </div>
             
-            <!-- Verification Process -->
-            <div class="card rounded-xl overflow-hidden cyber-border mb-12">
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-6">🔍 Verification Process</h3>
-                    <div class="relative timeline pl-12">
-                        <!-- Step 1 -->
-                        <div class="mb-8">
-                            <div class="absolute left-0 step-number">1</div>
-                            <div class="step-card rounded-lg p-6">
-                                <h4 class="text-lg font-bold mb-3 text-blue-400">Address Submission</h4>
-                                <p class="text-gray-300 mb-4">
-                                    Submit your wallet address and basic investment information
-                                </p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h5 class="font-medium mb-2">Required Information:</h5>
-                                        <ul class="text-sm text-gray-400 space-y-1">
-                                            <li>• Full name</li>
-                                            <li>• Investment amount</li>
-                                            <li>• Cryptocurrency type</li>
-                                            <li>• Wallet address</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-medium mb-2">Processing Time:</h5>
-                                        <div class="text-blue-400 font-bold">Instant</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Step 2 -->
-                        <div class="mb-8">
-                            <div class="absolute left-0 step-number">2</div>
-                            <div class="step-card rounded-lg p-6">
-                                <h4 class="text-lg font-bold mb-3 text-blue-400">Format Verification</h4>
-                                <p class="text-gray-300 mb-4">
-                                    Automated validation of wallet address format and checksum
-                                </p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h5 class="font-medium mb-2">Validation Rules:</h5>
-                                        <ul class="text-sm text-gray-400 space-y-1">
-                                            <li>• Address format compliance</li>
-                                            <li>• Checksum verification</li>
-                                            <li>• Network compatibility</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-medium mb-2">Processing Time:</h5>
-                                        <div class="text-blue-400 font-bold">1 Hour</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Step 3 -->
-                        <div class="mb-8">
-                            <div class="absolute left-0 step-number">3</div>
-                            <div class="step-card rounded-lg p-6">
-                                <h4 class="text-lg font-bold mb-3 text-blue-400">Ownership Verification</h4>
-                                <p class="text-gray-300 mb-4">
-                                    Prove wallet ownership through message signing or test transaction
-                                </p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h5 class="font-medium mb-2">Verification Methods:</h5>
-                                        <ul class="text-sm text-gray-400 space-y-1">
-                                            <li>• Message signature</li>
-                                            <li>• Small test transaction</li>
-                                            <li>• Exchange verification</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-medium mb-2">Processing Time:</h5>
-                                        <div class="text-blue-400 font-bold">24 Hours</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Step 4 -->
-                        <div class="mb-8">
-                            <div class="absolute left-0 step-number">4</div>
-                            <div class="step-card rounded-lg p-6">
-                                <h4 class="text-lg font-bold mb-3 text-blue-400">Compliance Review</h4>
-                                <p class="text-gray-300 mb-4">
-                                    AML/KYC verification and blockchain analysis
-                                </p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h5 class="font-medium mb-2">Review Process:</h5>
-                                        <ul class="text-sm text-gray-400 space-y-1">
-                                            <li>• Transaction history analysis</li>
-                                            <li>• Sanctions list screening</li>
-                                            <li>• Source of funds verification</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-medium mb-2">Processing Time:</h5>
-                                        <div class="text-blue-400 font-bold">2-3 Business Days</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Step 5 -->
-                        <div class="mb-8">
-                            <div class="absolute left-0 step-number">5</div>
-                            <div class="step-card rounded-lg p-6">
-                                <h4 class="text-lg font-bold mb-3 text-blue-400">Final Approval</h4>
-                                <p class="text-gray-300 mb-4">
-                                    Risk assessment and senior management approval
-                                </p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h5 class="font-medium mb-2">Approval Criteria:</h5>
-                                        <ul class="text-sm text-gray-400 space-y-1">
-                                            <li>• Risk score assessment</li>
-                                            <li>• Compliance verification</li>
-                                            <li>• Management review</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-medium mb-2">Processing Time:</h5>
-                                        <div class="text-blue-400 font-bold">1 Business Day</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8 p-4 bg-green-900 bg-opacity-30 border border-green-500 border-opacity-50 rounded-lg">
-                        <h4 class="font-bold text-green-400 mb-2">
-                            <i class="fas fa-clock mr-2"></i>
-                            Total Processing Time
-                        </h4>
-                        <p class="text-lg font-bold text-green-400">
-                            5-7 Business Days
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Action Buttons -->
-            <div class="text-center">
-                <div class="inline-flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="mailto:wallet-support@aif.market" class="btn-primary px-8 py-3 rounded-full font-medium text-center">
-                        <i class="fas fa-wallet mr-2"></i>
-                        Start Wallet Verification
-                    </a>
-                    <a href="mailto:compliance@aif.market" class="btn-secondary px-8 py-3 rounded-full font-medium text-center">
-                        <i class="fas fa-question-circle mr-2"></i>
-                        Compliance Consultation
-                    </a>
-                </div>
+            <div class="card">
+                <div class="card-icon">9️⃣</div>
+                <h3 class="card-title">
+                    <span class="lang-zh active">九大權益</span>
+                    <span class="lang-en">9 Benefits</span>
+                </h3>
+                <p class="card-text">
+                    <span class="lang-zh active">方案的終極價值錨定。代表僅供前10,000名「創世會員」獨享的9大專屬權益，製造FOMO效應，驅動早期用戶快速湧入。</span>
+                    <span class="lang-en">Ultimate value anchor of the plan. Represents 9 exclusive benefits available only to the first 10,000 "Genesis Members," creating FOMO effect to drive rapid early user influx.</span>
+                </p>
             </div>
         </div>
     </section>
-
-    <!-- Certificate Modals -->
-    <!-- Modal for Main Certificate of Incorporation -->
-    <div class="certificate-modal" id="incorporation-mainModal">
-        <div class="certificate-modal-content">
-            <div class="certificate-modal-close" data-close="incorporation-main">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="certificate-container certificate-full-view">
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <div class="certificate-title">公司註冊證明書</div>
-                        <div class="certificate-subtitle">CERTIFICATE OF INCORPORATION</div>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <div class="text-center mb-6">
-                            <div class="font-mono text-xl">編號 77536113</div>
-                            <div class="text-sm text-gray-400 mt-1">No. 77536113</div>
-                        </div>
-                        
-                        <div class="text-center font-bold mb-8">
-                            <div class="text-xl">公司註冊處</div>
-                            <div class="text-lg">COMPANIES REGISTRY</div>
-                        </div>
-                        
-                        <div class="text-center mb-10">
-                            <div class="certificate-title">公司註冊證明書</div>
-                            <div class="certificate-subtitle">CERTIFICATE OF INCORPORATION</div>
-                        </div>
-                        
-                        <div class="text-center mb-12">
-                            <div class="text-xl">***</div>
-                        </div>
-                        
-                        <div class="certificate-body">
-                            <div class="mb-8">
-                                <div class="mb-4 text-lg">本人謹此證明</div>
-                                <div class="mb-4 text-lg">I hereby certify that</div>
-                                
-                                <div class="text-center font-bold mb-8">
-                                    <div class="text-xl">Hong Kong AI International Film Festival Limited</div>
-                                    <div class="text-xl">香港人工智能國際電影節協會有限公司</div>
-                                </div>
-                                
-                                <div class="mb-4 text-lg">
-                                    <div>於本日根據香港法例第622章《公司條例》</div>
-                                    <div>is this day incorporated in Hong Kong under the Companies Ordinance</div>
-                                </div>
-                                
-                                <div class="mb-4 text-lg">
-                                    <div>在香港成立為法團，此公司是一間</div>
-                                    <div>(Chapter 622 of the Laws of Hong Kong), and that this company is</div>
-                                </div>
-                                
-                                <div class="text-center font-bold mb-10">
-                                    <div class="text-xl">有限公司。</div>
-                                    <div class="text-xl">a limited company.</div>
-                                </div>
-                                
-                                <div class="text-center mb-10">
-                                    <div class="text-lg">本證明書於二〇二四年十二月三十一日發出。</div>
-                                    <div class="text-lg">Issued on 31 December 2024.</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="certificate-divider"></div>
-                        
-                        <div class="certificate-signature">
-                            <div class="text-lg">香港特別行政區公司註冊處處長鄧婉雯</div>
-                            <div class="text-lg">Miss Helen TANG</div>
-                            <div class="certificate-signature-name">Registrar of Companies</div>
-                            <div class="text-lg">Hong Kong Special Administrative Region</div>
-                        </div>
-                        
-                        <div class="certificate-note">
-                            註 Note：<br>
-                            公司名稱獲公司註冊處註冊，並不表示獲授予該公司名稱或其任何部分的商標權或任何其他知識產權。<br>
-                            Registration of a company name with the Companies Registry does not confer any trade mark rights or any other intellectual property rights in respect of the company name or any part thereof.
-                        </div>
-                    </div>
-                </div>
-            </div>
+    
+    <section id="benefits" class="section" style="background: rgba(255, 215, 0, 0.02);">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="lang-zh active">會員體系與權益</span>
+                <span class="lang-en">Membership Tiers & Benefits</span>
+            </h2>
+            <p class="section-subtitle">
+                <span class="lang-zh active">利用身份稀缺性製造FOMO，同時賦能後期用戶持續裂變動機</span>
+                <span class="lang-en">Leveraging Identity Scarcity to Create FOMO while Empowering Later Users with Continuous Viral Motivation</span>
+            </p>
         </div>
-    </div>
-
-    <!-- Modal for Academy Certificate of Incorporation -->
-    <div class="certificate-modal" id="incorporation-academyModal">
-        <div class="certificate-modal-content">
-            <div class="certificate-modal-close" data-close="incorporation-academy">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="certificate-container certificate-full-view">
-                <div class="certificate-content">
-                    <div class="certificate-header">
-                        <div class="certificate-title">公司註冊證明書</div>
-                        <div class="certificate-subtitle">CERTIFICATE OF INCORPORATION</div>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <div class="text-center mb-6">
-                            <div class="font-mono text-xl">編號 77960839</div>
-                            <div class="text-sm text-gray-400 mt-1">No. 77960839</div>
-                        </div>
-                        
-                        <div class="text-center font-bold mb-8">
-                            <div class="text-xl">公司註冊處</div>
-                            <div class="text-lg">COMPANIES REGISTRY</div>
-                        </div>
-                        
-                        <div class="text-center mb-10">
-                            <div class="certificate-title">公司註冊證明書</div>
-                            <div class="certificate-subtitle">CERTIFICATE OF INCORPORATION</div>
-                        </div>
-                        
-                        <div class="text-center mb-12">
-                            <div class="text-xl">***</div>
-                        </div>
-                        
-                        <div class="certificate-body">
-                            <div class="mb-8">
-                                <div class="mb-4 text-lg">本人謹此證明</div>
-                                <div class="mb-4 text-lg">I hereby certify that</div>
-                                
-                                <div class="text-center font-bold mb-8">
-                                    <div class="text-xl">Hong Kong AI Film Academy Limited</div>
-                                </div>
-                                
-                                <div class="mb-4 text-lg">
-                                    <div>於本日根據香港法例第622章《公司條例》</div>
-                                    <div>is this day incorporated in Hong Kong under the Companies Ordinance</div>
-                                </div>
-                                
-                                <div class="mb-4 text-lg">
-                                    <div>在香港成立為法團，此公司是一間</div>
-                                    <div>(Chapter 622 of the Laws of Hong Kong), and that this company is</div>
-                                </div>
-                                
-                                <div class="text-center font-bold mb-10">
-                                    <div class="text-xl">有限公司。</div>
-                                    <div class="text-xl">a limited company.</div>
-                                </div>
-                                
-                                <div class="text-center mb-10">
-                                    <div class="text-lg">本證明書於二〇二五年四月三日發出。</div>
-                                    <div class="text-lg">Issued on 3 April 2025.</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="certificate-divider"></div>
-                        
-                        <div class="certificate-signature">
-                            <div class="text-lg">香港特別行政區公司註冊處處長楊善</div>
-                            <div class="text-lg">Ms Majestic YEUNG</div>
-                            <div class="certificate-signature-name">Registrar of Companies</div>
-                            <div class="text-lg">Hong Kong Special Administrative Region</div>
-                        </div>
-                        
-                        <div class="certificate-note">
-                            註 Note：<br>
-                            公司名稱獲公司註冊處註冊，並不表示獲授予該公司名稱或其任何部分的商標權或任何其他知識產權。<br>
-                            Registration of a company name with the Companies Registry does not confer any trade mark rights or any other intellectual property rights in respect of the company name or any part thereof.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for Business Registration 1 -->
-    <div class="certificate-modal" id="business1Modal">
-        <div class="certificate-modal-content">
-            <div class="certificate-modal-close" data-close="business1">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="business-reg-cert certificate-full-view">
-                <div class="business-reg-header">
-                    <div class="text-center mb-4">
-                        <div class="text-red-600 font-bold text-lg">CR</div>
-                        <div class="text-sm">公司註冊處</div>
-                        <div class="text-sm">COMPANIES REGISTRY</div>
-                    </div>
-                    <div class="business-reg-title">商業登記條例 (第310章)</div>
-                    <div class="text-sm mb-2">BUSINESS REGISTRATION ORDINANCE (Chapter 310)</div>
-                    <div class="text-sm mb-4">(商業登記規例) BUSINESS REGISTRATION REGULATIONS</div>
-                    <div class="business-reg-number">Certificate No. 77536113-002-12-24-7</div>
+        
+        <div class="grid grid-2">
+            <div class="card" style="border: 3px solid var(--gold); box-shadow: 0 10px 50px rgba(255, 215, 0, 0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h3 style="font-size: 2.5rem; font-weight: 900; color: var(--gold); font-family: 'Orbitron', sans-serif;">
+                        <span class="lang-zh active">創世會員</span>
+                        <span class="lang-en">Genesis Member</span>
+                    </h3>
+                    <span class="tier-badge tier-genesis">TIER 1</span>
                 </div>
                 
-                <div class="business-reg-body">
-                    <div class="reg-field">
-                        <div class="reg-field-label">業務 / 法團所用名稱 (Name of Business/Corporation)</div>
-                        <div class="reg-field-value">香港人工智能國際電影節協會有限公司</div>
-                        <div class="reg-field-value">HONG KONG AI INTERNATIONAL FILM FESTIVAL LIMITED</div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">業務 / 分行名稱 (Business/Branch Name)</div>
-                        <div class="reg-field-value">香港人工智能電影市場</div>
-                        <div class="reg-field-value">HONG KONG ARTIFICIAL INTELLIGENCE FILM MARKET</div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">地址 (Address)</div>
-                        <div class="reg-field-value">FLAT D07 8/F</div>
-                        <div class="reg-field-value">KAI TAK FTY BUILDING</div>
-                        <div class="reg-field-value">NO.99 KING FUK ST SANPOKONG KL</div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">業務性質 (Nature of Business)</div>
-                        <div class="reg-field-value">人工智能算法，技術，產品和電影節及電影業相關的活動和產品</div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">法律地位 (Status)</div>
-                        <div class="reg-field-value">BODY CORPORATE</div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="reg-field">
-                            <div class="reg-field-label">生效日期 (Date of Commencement)</div>
-                            <div class="reg-field-value">22/01/2025</div>
-                        </div>
-                        
-                        <div class="reg-field">
-                            <div class="reg-field-label">屆滿日期 (Date of Expiry)</div>
-                            <div class="reg-field-value">30/12/2025</div>
-                        </div>
-                        
-                        <div class="reg-field">
-                            <div class="reg-field-label">登記證號碼 (Certificate No.)</div>
-                            <div class="reg-field-value">77536113-002-12-24-7</div>
-                        </div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">登記費及徵費 (Fee and Levy)</div>
-                        <div class="reg-field-value">$80 (登記費 FEE = $80) (徵費 LEVY = $0)</div>
-                    </div>
-                    
-                    <div class="certificate-note mt-6">
-                        請注意下列（商業登記條例）的規定：<br>
-                        Please note the following requirements of the Business Registration Ordinance:<br><br>
-                        1. 第6(6)條規定任何業務獲發商業登記證或分行登記證，並不表示該業務或該業務的人或僱員於執行該業務的僱員已遵從有關的任何法律規定。<br>
-                        1. Section 6(6) provides that the issue of a business registration certificate or a branch registration certificate shall not be deemed to imply that the requirements of any law in relation to such business or to the persons carrying on the same or employed therein have been complied with.<br><br>
-                        2. 第12條規定各業務須將其有效的商業登記證或有效的分行登記證於每一營業地點展示。<br>
-                        2. Section 12 provides that valid business registration certificate or valid branch registration certificate shall be displayed at every address where business is carried on.
-                    </div>
-                </div>
+                <p style="font-size: 1.2rem; color: #ccc; margin-bottom: 2rem;">
+                    <span class="lang-zh active">資格：全網第 1 至 10,000 位錢包地址用戶</span>
+                    <span class="lang-en">Eligibility: Users #1 to #10,000 wallet addresses network-wide</span>
+                </p>
+                
+                <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 1.5rem;">
+                    <span class="lang-zh active">🎁 9大專屬權益</span>
+                    <span class="lang-en">🎁 9 Exclusive Benefits</span>
+                </h4>
+                
+                <ul class="benefit-list">
+                    <li class="benefit-item">
+                        <span class="benefit-number">1</span>
+                        <span class="lang-zh active">最優惠代幣價格（鎖定早期價格）</span>
+                        <span class="lang-en">Best Token Price (Lock in Early Price)</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">2</span>
+                        <span class="lang-zh active">Genesis NFT 徽章（限量身份證明）</span>
+                        <span class="lang-en">Genesis NFT Badge (Limited Identity Proof)</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">3</span>
+                        <span class="lang-zh active">FilmToken 優先投資權</span>
+                        <span class="lang-en">FilmToken Priority Investment Rights</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">4</span>
+                        <span class="lang-zh active">電影市場優先購買（提前12小時）</span>
+                        <span class="lang-en">Film Market Priority Purchase (12 Hours Early)</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">5</span>
+                        <span class="lang-zh active">交易手續費 5 折（終身）</span>
+                        <span class="lang-en">50% Transaction Fee Discount (Lifetime)</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">6</span>
+                        <span class="lang-zh active">電影學院獎學金</span>
+                        <span class="lang-en">Film Academy Scholarship</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">7</span>
+                        <span class="lang-zh active">生態系統 VIP 待遇（終身）</span>
+                        <span class="lang-en">Ecosystem VIP Treatment (Lifetime)</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">8</span>
+                        <span class="lang-zh active">A2CLUB 會籍 5 折</span>
+                        <span class="lang-en">50% A2CLUB Membership Discount</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">9</span>
+                        <span class="lang-zh active">AIFcard 年費 5 折</span>
+                        <span class="lang-en">50% AIFcard Annual Fee Discount</span>
+                    </li>
+                </ul>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal for Business Registration 2 -->
-    <div class="certificate-modal" id="business2Modal">
-        <div class="certificate-modal-content">
-            <div class="certificate-modal-close" data-close="business2">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="business-reg-cert certificate-full-view">
-                <div class="business-reg-header">
-                    <div class="text-center mb-4">
-                        <div class="text-red-600 font-bold text-lg">CR</div>
-                        <div class="text-sm">公司註冊處</div>
-                        <div class="text-sm">COMPANIES REGISTRY</div>
-                    </div>
-                    <div class="business-reg-title">商業登記條例 (第310章)</div>
-                    <div class="text-sm mb-2">BUSINESS REGISTRATION ORDINANCE (Chapter 310)</div>
-                    <div class="text-sm mb-4">(商業登記規例) BUSINESS REGISTRATION REGULATIONS</div>
-                    <div class="business-reg-number">Certificate No. 77536113-001-12-24-6</div>
+            
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h3 style="font-size: 2.5rem; font-weight: 900; color: rgba(255, 215, 0, 0.8); font-family: 'Orbitron', sans-serif;">
+                        <span class="lang-zh active">黃金會員</span>
+                        <span class="lang-en">Gold Member</span>
+                    </h3>
+                    <span class="tier-badge tier-gold">TIER 2</span>
                 </div>
                 
-                <div class="business-reg-body">
-                    <div class="reg-field">
-                        <div class="reg-field-label">業務 / 法團所用名稱 (Name of Business/Corporation)</div>
-                        <div class="reg-field-value">香港人工智能國際電影節協會有限公司</div>
-                        <div class="reg-field-value">HONG KONG AI INTERNATIONAL FILM FESTIVAL LIMITED</div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">業務 / 分行名稱 (Business/Branch Name)</div>
-                        <div class="reg-field-value">香港人工智能國際電影節協會</div>
-                        <div class="reg-field-value">HONG KONG ARTIFICIAL INTERNATIONAL FILM FESTIVAL ASSOCIATION</div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">地址 (Address)</div>
-                        <div class="reg-field-value">RM D07 8/F</div>
-                        <div class="reg-field-value">KAI TAK FTY BUILDING</div>
-                        <div class="reg-field-value">NO. 99 KING FUK ST SANPOKONG KL</div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">業務性質 (Nature of Business)</div>
-                        <div class="reg-field-value">人工智能算法，技術，產品和電影節及電影業相關的活動和產品</div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">法律地位 (Status)</div>
-                        <div class="reg-field-value">BODY CORPORATE</div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="reg-field">
-                            <div class="reg-field-label">生效日期 (Date of Commencement)</div>
-                            <div class="reg-field-value">22/01/2025</div>
-                        </div>
-                        
-                        <div class="reg-field">
-                            <div class="reg-field-label">屆滿日期 (Date of Expiry)</div>
-                            <div class="reg-field-value">30/12/2025</div>
-                        </div>
-                        
-                        <div class="reg-field">
-                            <div class="reg-field-label">登記證號碼 (Certificate No.)</div>
-                            <div class="reg-field-value">77536113-001-12-24-6</div>
-                        </div>
-                    </div>
-                    
-                    <div class="reg-field">
-                        <div class="reg-field-label">登記費及徵費 (Fee and Levy)</div>
-                        <div class="reg-field-value">$80 (登記費 FEE = $80) (徵費 LEVY = $0)</div>
-                    </div>
-                    
-                    <div class="certificate-note mt-6">
-                        請注意下列（商業登記條例）的規定：<br>
-                        Please note the following requirements of the Business Registration Ordinance:<br><br>
-                        1. 第6(6)條規定任何業務獲發商業登記證或分行登記證，並不表示該業務或該業務的人或僱員於執行該業務的僱員已遵從有關的任何法律規定。<br>
-                        1. Section 6(6) provides that the issue of a business registration certificate or a branch registration certificate shall not be deemed to imply that the requirements of any law in relation to such business or to the persons carrying on the same or employed therein have been complied with.<br><br>
-                        2. 第12條規定各業務須將其有效的商業登記證或有效的分行登記證於每一營業地點展示。<br>
-                        2. Section 12 provides that valid business registration certificate or valid branch registration certificate shall be displayed at every address where business is carried on.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="logo-font mb-4">HKAIFM</div>
-                    <p class="text-gray-400 mb-4">
-                        Revolutionizing the film industry through AI and blockchain technology.
+                <p style="font-size: 1.2rem; color: #ccc; margin-bottom: 2rem;">
+                    <span class="lang-zh active">資格：全網第 10,001 至 150,000 位錢包地址用戶</span>
+                    <span class="lang-en">Eligibility: Users #10,001 to #150,000 wallet addresses network-wide</span>
+                </p>
+                
+                <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 1.5rem;">
+                    <span class="lang-zh active">⭐ 3大核心投資權益</span>
+                    <span class="lang-en">⭐ 3 Core Investment Benefits</span>
+                </h4>
+                
+                <ul class="benefit-list">
+                    <li class="benefit-item">
+                        <span class="benefit-number">1</span>
+                        <span class="lang-zh active">最優惠代幣價格（獲得該階段的早鳥價）</span>
+                        <span class="lang-en">Best Token Price (Get Early Bird Price for That Stage)</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">2</span>
+                        <span class="lang-zh active">FilmToken 優先投資權</span>
+                        <span class="lang-en">FilmToken Priority Investment Rights</span>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="benefit-number">3</span>
+                        <span class="lang-zh active">電影市場優先購買（提前12小時）</span>
+                        <span class="lang-en">Film Market Priority Purchase (12 Hours Early)</span>
+                    </li>
+                </ul>
+                
+                <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(0, 255, 157, 0.05); border-radius: 15px; border-left: 4px solid var(--accent);">
+                    <p style="font-size: 1rem; color: #ccc; line-height: 1.8;">
+                        <span class="lang-zh active">💡 <strong style="color: var(--accent);">策略重點：</strong>黃金會員雖然沒有9大權益，但依然保留了最重要的3項投資相關權益，使其會員資格依然具備強大的吸引力和裂變動機。</span>
+                        <span class="lang-en">💡 <strong style="color: var(--accent);">Strategic Focus:</strong> Although Gold Members don't have the 9 benefits, they still retain the 3 most important investment-related benefits, making their membership qualification still highly attractive with strong viral motivation.</span>
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="rewards" class="section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="lang-zh active">裂變獎勵機制</span>
+                <span class="lang-en">Viral Reward Mechanism</span>
+            </h2>
+            <p class="section-subtitle">
+                <span class="lang-zh active">二二複製 + 七人成團 = 零成本回本 + 持續被動收入</span>
+                <span class="lang-en">2x2 Replication + Team of 7 = Zero-Cost Payback + Continuous Passive Income</span>
+            </p>
+        </div>
+        
+        <div class="grid grid-2">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3 class="card-title">
+                    <span class="lang-zh active">A. 「二二複製」快速回本獎</span>
+                    <span class="lang-en">A. "2x2 Replication" Fast Payback Reward</span>
+                </h3>
+                <p class="card-text" style="margin-bottom: 1.5rem;">
+                    <span class="lang-zh active">此機制用於消除新用戶的進場阻力，實現「零成本」獲取會員資格。</span>
+                    <span class="lang-en">This mechanism eliminates entry barriers for new users, achieving "zero-cost" membership qualification.</span>
+                </p>
+                
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 1rem; margin-bottom: 0.8rem; background: rgba(255, 215, 0, 0.05); border-radius: 10px; border-left: 3px solid var(--accent);">
+                        <div style="font-weight: 700; color: var(--accent); margin-bottom: 0.5rem;">
+                            <span class="lang-zh active">第1位會員</span>
+                            <span class="lang-en">1st Member</span>
+                        </div>
+                        <div style="color: #ccc;">
+                            <span class="lang-zh active">您獲得購買金額的 <span class="highlight">20%</span> 作為獎金</span>
+                            <span class="lang-en">You receive <span class="highlight">20%</span> of purchase amount as reward</span>
+                        </div>
+                    </li>
+                    <li style="padding: 1rem; margin-bottom: 0.8rem; background: rgba(255, 215, 0, 0.05); border-radius: 10px; border-left: 3px solid var(--gold);">
+                        <div style="font-weight: 700; color: var(--gold); margin-bottom: 0.5rem;">
+                            <span class="lang-zh active">第2位會員</span>
+                            <span class="lang-en">2nd Member</span>
+                        </div>
+                        <div style="color: #ccc;">
+                            <span class="lang-zh active">您獲得購買金額的 <span class="highlight">80%</span> 作為獎金</span>
+                            <span class="lang-en">You receive <span class="highlight">80%</span> of purchase amount as reward</span>
+                        </div>
+                    </li>
+                    <li style="padding: 1rem; background: rgba(255, 215, 0, 0.05); border-radius: 10px; border-left: 3px solid #888;">
+                        <div style="font-weight: 700; color: #888; margin-bottom: 0.5rem;">
+                            <span class="lang-zh active">第3位及以上</span>
+                            <span class="lang-en">3rd Member & Above</span>
+                        </div>
+                        <div style="color: #ccc;">
+                            <span class="lang-zh active">獎金比例恢復為固定 <span class="highlight">20%</span></span>
+                            <span class="lang-en">Reward returns to fixed <span class="highlight">20%</span></span>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="example-box">
+                    <div class="example-title">
+                        <i class="fas fa-calculator"></i>
+                        <span class="lang-zh active">範例（$500階段）</span>
+                        <span class="lang-en">Example ($500 Stage)</span>
                     </div>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Platform</h3>
-                    <ul class="space-y-2">
-                        <li><a href="index.html#marketplace" class="text-gray-400 hover:text-white">Marketplace</a></li>
-                        <li><a href="index.html#create" class="text-gray-400 hover:text-white">Create</a></li>
-                        <li><a href="index.html#invest" class="text-gray-400 hover:text-white">Invest</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#saft" class="text-gray-400 hover:text-white">SAFT Agreement</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
-                    <ul class="space-y-2">
-                        <li><a href="mailto:legal@aif.market" class="text-gray-400 hover:text-white">Legal</a></li>
-                        <li><a href="mailto:support@aif.market" class="text-gray-400 hover:text-white">Support</a></li>
-                        <li><a href="mailto:verification@aif.market" class="text-gray-400 hover:text-white">Verification</a></li>
-                    </ul>
+                    <ol style="padding-left: 1.5rem; color: #ccc; line-height: 2;">
+                        <li class="lang-zh active">您花 $500 成為會員</li>
+                        <li class="lang-zh active">邀請A（支付$500）→ 您獲得 $100（20%）</li>
+                        <li class="lang-zh active">邀請B（支付$500）→ 您獲得 $400（80%）</li>
+                        <li class="lang-zh active" style="font-weight: 700; color: var(--accent);">結果：總獲獎$500，成本完全拿回！</li>
+                        
+                        <li class="lang-en">You pay $500 to become a member</li>
+                        <li class="lang-en">Invite A (pays $500) → You receive $100 (20%)</li>
+                        <li class="lang-en">Invite B (pays $500) → You receive $400 (80%)</li>
+                        <li class="lang-en" style="font-weight: 700; color: var(--accent);">Result: Total reward $500, cost fully recovered!</li>
+                    </ol>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
-                <p>© 2025 Hong Kong AI Film Market. All rights reserved.</p>
+            
+            <div class="card">
+                <div class="card-icon">🤝</div>
+                <h3 class="card-title">
+                    <span class="lang-zh active">B. 「七人成團」團隊幫扶獎</span>
+                    <span class="lang-en">B. "Team of 7" Team Support Reward</span>
+                </h3>
+                <p class="card-text" style="margin-bottom: 1.5rem;">
+                    <span class="lang-zh active">此機制取代了傳統的平台分紅，變為更健康、更可持續的團隊管理獎金，鼓勵您「幫扶」下線。</span>
+                    <span class="lang-en">This mechanism replaces traditional platform dividends with healthier, more sustainable team management bonuses, encouraging you to "support" your downlines.</span>
+                </p>
+                
+                <div style="padding: 1.5rem; background: rgba(0, 255, 157, 0.05); border-radius: 15px; border: 2px solid var(--accent); margin-bottom: 1.5rem;">
+                    <div style="font-weight: 700; font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem;">
+                        <span class="lang-zh active">📋 達成條件</span>
+                        <span class="lang-en">📋 Achievement Conditions</span>
+                    </div>
+                    <p style="color: #ccc; line-height: 1.8;">
+                        <span class="lang-zh active">您完成了「七人成團」（即：您的2位直推A和B，也各自完成了他們的「二二複製」）</span>
+                        <span class="lang-en">You complete the "Team of 7" (i.e., your 2 direct referrals A and B both complete their own "2x2 Replication")</span>
+                    </p>
+                </div>
+                
+                <div style="padding: 1.5rem; background: rgba(255, 215, 0, 0.05); border-radius: 15px; border: 2px solid var(--gold); margin-bottom: 1.5rem;">
+                    <div style="font-weight: 700; font-size: 1.2rem; color: var(--gold); margin-bottom: 1rem;">
+                        <span class="lang-zh active">🎁 獲得獎勵</span>
+                        <span class="lang-en">🎁 Reward Received</span>
+                    </div>
+                    <p style="color: #ccc; line-height: 1.8;">
+                        <span class="lang-zh active">您將永久獲得您直屬下線（A和B）未來所獲得的「快速回本獎（20%/80%）」總獎金的 <span class="highlight">10%</span></span>
+                        <span class="lang-en">You permanently receive <span class="highlight">10%</span> of the total "Fast Payback Rewards (20%/80%)" earned by your direct referrals (A and B) in the future</span>
+                    </p>
+                </div>
+                
+                <div class="example-box">
+                    <div class="example-title">
+                        <i class="fas fa-calculator"></i>
+                        <span class="lang-zh active">範例</span>
+                        <span class="lang-en">Example</span>
+                    </div>
+                    <ol style="padding-left: 1.5rem; color: #ccc; line-height: 2;">
+                        <li class="lang-zh active">您已「成團」</li>
+                        <li class="lang-zh active">您的下線B邀請C（$2,500價位）→ B獲獎$500（20%）</li>
+                        <li class="lang-zh active">B又邀請D（$2,500價位）→ B獲獎$2,000（80%）</li>
+                        <li class="lang-zh active">B共獲得$2,500獎金</li>
+                        <li class="lang-zh active" style="font-weight: 700; color: var(--accent);">您的獎勵：$2,500 × 10% = $250</li>
+                        <li class="lang-zh active" style="font-weight: 700; color: var(--gold);">結果：您幫助B賺錢，您就能獲得持續的被動收入</li>
+                        
+                        <li class="lang-en">You have "formed a team"</li>
+                        <li class="lang-en">Your downline B invites C ($2,500 tier) → B receives $500 (20%)</li>
+                        <li class="lang-en">B invites D ($2,500 tier) → B receives $2,000 (80%)</li>
+                        <li class="lang-en">B receives total of $2,500 in rewards</li>
+                        <li class="lang-en" style="font-weight: 700; color: var(--accent);">Your reward: $2,500 × 10% = $250</li>
+                        <li class="lang-en" style="font-weight: 700; color: var(--gold);">Result: When you help B earn money, you receive continuous passive income</li>
+                    </ol>
+                </div>
             </div>
+        </div>
+    </section>
+    
+    <section id="pricing" class="section" style="background: rgba(255, 215, 0, 0.02);">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="lang-zh active">階梯式定價策略</span>
+                <span class="lang-en">Tiered Pricing Strategy</span>
+            </h2>
+            <p class="section-subtitle">
+                <span class="lang-zh active">價格隨參與人數自動上漲，越早加入成本越低，價值越高</span>
+                <span class="lang-en">Price automatically increases with participant count - earlier entry means lower cost and higher value</span>
+            </p>
+        </div>
+        
+        <div style="margin-bottom: 4rem;">
+            <h3 style="font-size: 2rem; font-weight: 800; color: var(--gold); margin-bottom: 2rem; text-align: center;">
+                <span class="lang-zh active">階段一：創世會員期（1-10,000錢包）</span>
+                <span class="lang-en">Phase 1: Genesis Member Period (1-10,000 Wallets)</span>
+            </h3>
+            <p style="text-align: center; color: #ccc; font-size: 1.1rem; margin-bottom: 2rem;">
+                <span class="lang-zh active">🎯 目標：鎖定9大權益和最低價格 | 機制：每1,000個錢包，AIF價格上漲$0.005</span>
+                <span class="lang-en">🎯 Goal: Lock in 9 benefits and lowest price | Mechanism: AIF price increases by $0.005 per 1,000 wallets</span>
+            </p>
+            
+            <div class="pricing-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="lang-zh active">錢包總數（區間）</th>
+                            <th class="lang-zh active">會員身份</th>
+                            <th class="lang-zh active">AIF代幣單價</th>
+                            <th class="lang-zh active">10,000 AIF購買價</th>
+                            
+                            <th class="lang-en">Wallet Range</th>
+                            <th class="lang-en">Member Tier</th>
+                            <th class="lang-en">AIF Token Price</th>
+                            <th class="lang-en">10,000 AIF Purchase Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color: var(--gold);">1 - 1,000</strong></td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td><strong style="color: var(--accent);">$0.050</strong></td>
+                            <td><strong style="color: var(--accent); font-size: 1.2rem;">$500</strong></td>
+                        </tr>
+                        <tr>
+                            <td>1,001 - 2,000</td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td>$0.055</td>
+                            <td>$550</td>
+                        </tr>
+                        <tr>
+                            <td>2,001 - 3,000</td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td>$0.060</td>
+                            <td>$600</td>
+                        </tr>
+                        <tr>
+                            <td>3,001 - 4,000</td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td>$0.065</td>
+                            <td>$650</td>
+                        </tr>
+                        <tr>
+                            <td>4,001 - 5,000</td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td>$0.070</td>
+                            <td>$700</td>
+                        </tr>
+                        <tr>
+                            <td>5,001 - 6,000</td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td>$0.075</td>
+                            <td>$750</td>
+                        </tr>
+                        <tr>
+                            <td>6,001 - 7,000</td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td>$0.080</td>
+                            <td>$800</td>
+                        </tr>
+                        <tr>
+                            <td>7,001 - 8,000</td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td>$0.085</td>
+                            <td>$850</td>
+                        </tr>
+                        <tr>
+                            <td>8,001 - 9,000</td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td>$0.090</td>
+                            <td>$900</td>
+                        </tr>
+                        <tr>
+                            <td>9,001 - 10,000</td>
+                            <td><span class="tier-badge tier-genesis lang-zh active">創世會員</span><span class="tier-badge tier-genesis lang-en">GENESIS</span></td>
+                            <td>$0.095</td>
+                            <td>$950</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div>
+            <h3 style="font-size: 2rem; font-weight: 800; color: rgba(255, 215, 0, 0.8); margin-bottom: 2rem; text-align: center;">
+                <span class="lang-zh active">階段二：黃金會員期（10,001-150,000錢包）</span>
+                <span class="lang-en">Phase 2: Gold Member Period (10,001-150,000 Wallets)</span>
+            </h3>
+            <p style="text-align: center; color: #ccc; font-size: 1.1rem; margin-bottom: 2rem;">
+                <span class="lang-zh active">🎯 目標：鎖定3大核心權益和AIF早期份額 | 機制：價格跳漲至$0.25，之後每10,000個錢包上漲$0.05</span>
+                <span class="lang-en">🎯 Goal: Lock in 3 core benefits and early AIF share | Mechanism: Price jumps to $0.25, then increases $0.05 per 10,000 wallets</span>
+            </p>
+            
+            <div class="pricing-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="lang-zh active">錢包總數（區間）</th>
+                            <th class="lang-zh active">會員身份</th>
+                            <th class="lang-zh active">AIF代幣單價</th>
+                            <th class="lang-zh active">10,000 AIF購買價</th>
+                            
+                            <th class="lang-en">Wallet Range</th>
+                            <th class="lang-en">Member Tier</th>
+                            <th class="lang-en">AIF Token Price</th>
+                            <th class="lang-en">10,000 AIF Purchase Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color: rgba(255, 215, 0, 0.8);">10,001 - 20,000</strong></td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td><strong style="color: var(--accent);">$0.25</strong></td>
+                            <td><strong style="color: var(--accent); font-size: 1.2rem;">$2,500</strong></td>
+                        </tr>
+                        <tr>
+                            <td>20,001 - 30,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.30</td>
+                            <td>$3,000</td>
+                        </tr>
+                        <tr>
+                            <td>30,001 - 40,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.35</td>
+                            <td>$3,500</td>
+                        </tr>
+                        <tr>
+                            <td>40,001 - 50,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.40</td>
+                            <td>$4,000</td>
+                        </tr>
+                        <tr>
+                            <td>50,001 - 60,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.45</td>
+                            <td>$4,500</td>
+                        </tr>
+                        <tr>
+                            <td>60,001 - 70,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.50</td>
+                            <td>$5,000</td>
+                        </tr>
+                        <tr>
+                            <td>70,001 - 80,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.55</td>
+                            <td>$5,500</td>
+                        </tr>
+                        <tr>
+                            <td>80,001 - 90,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.60</td>
+                            <td>$6,000</td>
+                        </tr>
+                        <tr>
+                            <td>90,001 - 100,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.65</td>
+                            <td>$6,500</td>
+                        </tr>
+                        <tr>
+                            <td>100,001 - 110,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.70</td>
+                            <td>$7,000</td>
+                        </tr>
+                        <tr>
+                            <td>110,001 - 120,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.75</td>
+                            <td>$7,500</td>
+                        </tr>
+                        <tr>
+                            <td>120,001 - 130,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.80</td>
+                            <td>$8,000</td>
+                        </tr>
+                        <tr>
+                            <td>130,001 - 140,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.85</td>
+                            <td>$8,500</td>
+                        </tr>
+                        <tr>
+                            <td>140,001 - 150,000</td>
+                            <td><span class="tier-badge tier-gold lang-zh active">黃金會員</span><span class="tier-badge tier-gold lang-en">GOLD</span></td>
+                            <td>$0.90</td>
+                            <td>$9,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div style="margin-top: 4rem; padding: 2rem; background: rgba(255, 215, 0, 0.1); border-radius: 20px; border: 2px solid var(--gold); text-align: center;">
+            <p style="font-size: 1.3rem; color: var(--gold); font-weight: 800; line-height: 1.8;">
+                <span class="lang-zh active">⚡ 產品規格：AIF會員資格包 = 10,000 AIF代幣<br>🔒 購買限制：每個錢包地址終身限購一份</span>
+                <span class="lang-en">⚡ Product Spec: AIF Membership Package = 10,000 AIF Tokens<br>🔒 Purchase Limit: One package per wallet address lifetime</span>
+            </p>
+        </div>
+    </section>
+    
+    <section id="process" class="section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="lang-zh active">用戶裂變路徑</span>
+                <span class="lang-en">User Viral Path</span>
+            </h2>
+            <p class="section-subtitle">
+                <span class="lang-zh active">四步驟完成從入場到回本，再到團隊裂變的完整閉環</span>
+                <span class="lang-en">Four steps to complete the full loop from entry to payback to team viral growth</span>
+            </p>
+        </div>
+        
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>
+                        <span class="lang-zh active">搶占身份</span>
+                        <span class="lang-en">Secure Your Identity</span>
+                    </h3>
+                    <p>
+                        <span class="lang-zh active">查看全網錢包數，例如當前是第8,500人，您支付$900。您獲得：10,000 AIF + 「創世會員」身份（永久鎖定9大權益）。如果進場晚了，例如第15,000人，您支付$2,500，獲得「黃金會員」身份和3大權益。</span>
+                        <span class="lang-en">Check network wallet count, e.g., if you're #8,500, you pay $900. You receive: 10,000 AIF + "Genesis Member" status (permanently locking in 9 benefits). If you join later, e.g., #15,000, you pay $2,500 for "Gold Member" status and 3 benefits.</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>
+                        <span class="lang-zh active">快速回本（二二複製）</span>
+                        <span class="lang-en">Fast Payback (2x2 Replication)</span>
+                    </h3>
+                    <p>
+                        <span class="lang-zh active">您邀請A（支付$900），您獲獎$180（20%）。您邀請B（支付$900），您獲獎$720（80%）。結果：您總獲獎$900，成本完全收回。</span>
+                        <span class="lang-en">You invite A (pays $900), you receive $180 (20%). You invite B (pays $900), you receive $720 (80%). Result: Total reward $900, cost fully recovered.</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>
+                        <span class="lang-zh active">建立團隊（七人成團）</span>
+                        <span class="lang-en">Build Team (Team of 7)</span>
+                    </h3>
+                    <p>
+                        <span class="lang-zh active">您協助A和B同樣完成「二二複製」，幫他們也拿回成本。結果：您的7人團隊構成，您解鎖了「團隊幫扶獎」（10%）的被動收入資格。</span>
+                        <span class="lang-en">You help A and B complete their "2x2 Replication" to recover their costs too. Result: Your 7-person team is formed, unlocking "Team Support Reward" (10%) passive income qualification.</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                    <h3>
+                        <span class="lang-zh active">享受生態</span>
+                        <span class="lang-en">Enjoy Ecosystem</span>
+                    </h3>
+                    <p>
+                        <span class="lang-zh active">您作為「創世會員」，憑藉9大權益（如5折交易費、VIP待遇），在AIF生態中享受最高待遇，實現AIF代幣和生態權益的雙重增值。</span>
+                        <span class="lang-en">As a "Genesis Member," with 9 major benefits (such as 50% transaction fee discount, VIP treatment), you enjoy the highest treatment in the AIF ecosystem, achieving dual appreciation of AIF tokens and ecosystem benefits.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 4rem; text-align: center;">
+            <button class="btn btn-primary" onclick="openCryptoModal()" style="font-size: 1.3rem; padding: 1.5rem 4rem;">
+                <i class="fas fa-rocket"></i>
+                <span class="lang-zh active">立即開始您的GENESIS279之旅</span>
+                <span class="lang-en">Start Your GENESIS279 Journey Now</span>
+            </button>
+            
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 255, 157, 0.05); border-radius: 15px; border-left: 4px solid var(--accent); max-width: 800px; margin-left: auto; margin-right: auto;">
+                <p style="font-size: 1rem; color: #ccc; line-height: 1.8;">
+                    <span class="lang-zh active">💡 目前已有 <strong style="color: var(--accent);"><span id="participating2">350</span></strong> 位用戶參與。創世會員名額有限，先到先得！</span>
+                    <span class="lang-en">💡 Currently <strong style="color: var(--accent);"><span id="participating-en2">350</span></strong> users participating. Genesis Member spots are limited, first come first served!</span>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="margin-bottom: 2rem;">
+                <div class="logo" style="margin-bottom: 1rem;">GENESIS279</div>
+                <p style="color: #999; font-size: 1rem;" class="lang-zh active">由香港AI國際電影節協會發起的創世裂變方案</p>
+                <p style="color: #999; font-size: 1rem;" class="lang-en">Genesis Viral Plan Initiated by Hong Kong AI International Film Festival Association</p>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <p style="color: #ccc; font-size: 0.9rem;" class="lang-zh active">聯繫我們：<a href="mailto:Genesis@aif.market" style="color: var(--gold); text-decoration: none;">Genesis@aif.market</a></p>
+                <p style="color: #ccc; font-size: 0.9rem;" class="lang-en">Contact Us: <a href="mailto:Genesis@aif.market" style="color: var(--gold); text-decoration: none;">Genesis@aif.market</a></p>
+            </div>
+            <p style="color: #666; font-size: 0.85rem;" class="lang-zh active">© 2025 香港AI國際電影節協會。保留所有權利。</p>
+            <p style="color: #666; font-size: 0.85rem;" class="lang-en">© 2025 Hong Kong AI International Film Festival Association. All Rights Reserved.</p>
+            <p style="margin-top: 1rem; color: #666; font-size: 0.8rem;" class="lang-zh active">本網站不構成投資建議。投資前請諮詢專業財務顧問。</p>
+            <p style="margin-top: 1rem; color: #666; font-size: 0.8rem;" class="lang-en">This website does not constitute investment advice. Please consult a professional financial advisor before investing.</p>
         </div>
     </footer>
 
+    <!-- 加密貨幣支付Modal -->
+    <div class="modal" id="cryptoModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeCryptoModal()">&times;</button>
+            <h2 style="margin-bottom: 1.5rem; color: var(--gold); font-size: 1.8rem;" class="lang-zh active">加密貨幣支付</h2>
+            <h2 style="margin-bottom: 1.5rem; color: var(--gold); font-size: 1.8rem;" class="lang-en">Cryptocurrency Payment</h2>
+            <p style="color: #aaa; margin-bottom: 1rem; font-size: 0.95rem;" class="lang-zh active">請將 USDT 或 USDC 發送到以下 Solana 錢包地址：</p>
+            <p style="color: #aaa; margin-bottom: 1rem; font-size: 0.95rem;" class="lang-en">Please send USDT or USDC to the following Solana wallet address:</p>
+            <p style="font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem;" class="lang-zh active">Solana 錢包地址：</p>
+            <p style="font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem;" class="lang-en">Solana Wallet Address:</p>
+            <div class="wallet-address" id="walletAddress">3QBgQiHC743ER9beX74bp8K7xrURQR2t5myfcG6tSTLv</div>
+            <button class="btn btn-primary" onclick="copyAddress()" style="width: 100%; margin-top: 1rem;">
+                <i class="fas fa-copy"></i> 
+                <span class="lang-zh active">複製錢包地址</span>
+                <span class="lang-en">Copy Wallet Address</span>
+            </button>
+            <p style="margin-top: 1.5rem; color: #aaa; font-size: 0.9rem; padding: 1rem; background: rgba(0,255,157,0.1); border-radius: 10px; border-left: 4px solid var(--accent); line-height: 1.7;">
+                <span class="lang-zh active">💡 支付完成後，請將交易收據和您的 Solana 錢包地址發送至 <strong style="color: var(--accent);">Genesis@aif.market</strong></span>
+                <span class="lang-en">💡 After payment, please send transaction receipt and your Solana wallet address to <strong style="color: var(--accent);">Genesis@aif.market</strong></span>
+            </p>
+        </div>
+    </div>
+
+    <!-- 法定貨幣支付Modal -->
+    <div class="modal" id="fiatModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeFiatModal()">&times;</button>
+            <h2 style="margin-bottom: 1.5rem; color: var(--gold); font-size: 1.8rem;" class="lang-zh active">法定貨幣支付</h2>
+            <h2 style="margin-bottom: 1.5rem; color: var(--gold); font-size: 1.8rem;" class="lang-en">Fiat Currency Payment</h2>
+            <p style="color: #aaa; margin-bottom: 1.5rem; font-size: 0.95rem;" class="lang-zh active">選擇您的支付貨幣：</p>
+            <p style="color: #aaa; margin-bottom: 1.5rem; font-size: 0.95rem;" class="lang-en">Choose your payment currency:</p>
+            
+            <a href="https://wise.com/pay/business/uj6hyy?currency=USD&amount=518.18&description=AIF-USD" target="_blank" class="currency-option">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="font-size: 2rem;">💵</div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.2rem;"><span class="lang-zh active">美元 USD</span><span class="lang-en">USD</span></div>
+                            <div style="font-size: 0.85rem; color: #888;">$518.18</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: var(--accent);"></i>
+                </div>
+            </a>
+            
+            <a href="https://wise.com/pay/business/uj6hyy?currency=HKD&amount=4026&description=AIF-HKD" target="_blank" class="currency-option">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="font-size: 2rem;">🇭🇰</div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.2rem;"><span class="lang-zh active">港元 HKD</span><span class="lang-en">HKD</span></div>
+                            <div style="font-size: 0.85rem; color: #888;">HK$4,026</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: var(--accent);"></i>
+                </div>
+            </a>
+            
+            <a href="https://wise.com/pay/business/uj6hyy?currency=CNY&amount=3690&description=AIF-CNY" target="_blank" class="currency-option">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="font-size: 2rem;">🇨🇳</div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.2rem;"><span class="lang-zh active">人民幣 CNY</span><span class="lang-en">CNY</span></div>
+                            <div style="font-size: 0.85rem; color: #888;">¥3,690</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: var(--accent);"></i>
+                </div>
+            </a>
+            
+            <a href="https://wise.com/pay/business/uj6hyy?currency=JPY&amount=79214&description=AIF-JPY" target="_blank" class="currency-option">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="font-size: 2rem;">🇯🇵</div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.2rem;"><span class="lang-zh active">日元 JPY</span><span class="lang-en">JPY</span></div>
+                            <div style="font-size: 0.85rem; color: #888;">¥79,214</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right" style="color: var(--accent);"></i>
+                </div>
+            </a>
+            
+            <p style="margin-top: 1.5rem; color: #aaa; font-size: 0.85rem; padding: 1rem; background: rgba(0,255,157,0.1); border-radius: 10px; border-left: 4px solid var(--accent); line-height: 1.7;">
+                <span class="lang-zh active">💡 支付完成後，請將收據和您的 Solana 錢包地址發送至 <strong style="color: var(--accent);">Genesis@aif.market</strong></span>
+                <span class="lang-en">💡 After payment, send receipt and your Solana wallet address to <strong style="color: var(--accent);">Genesis@aif.market</strong></span>
+            </p>
+        </div>
+    </div>
+
     <script>
-        // Mobile menu functionality
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        let currentLang = 'zh';
         
-        if (mobileMenuBtn && mobileMenu && mobileMenuClose) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.add('open');
-                document.body.style.overflow = 'hidden';
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            
+            document.querySelectorAll('.lang-zh').forEach(el => {
+                el.classList.toggle('active', currentLang === 'zh');
             });
             
-            mobileMenuClose.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = 'auto';
+            document.querySelectorAll('.lang-en').forEach(el => {
+                el.classList.toggle('active', currentLang === 'en');
             });
+            
+            document.getElementById('langBtn').textContent = currentLang === 'zh' ? 'EN' : '中文';
+            document.getElementById('langBtnMobile').textContent = currentLang === 'zh' ? 'EN' : '中文';
         }
         
-        // Certificate tabs functionality
-        const certificateTabs = document.querySelectorAll('.certificate-tab');
-        const certificateWrappers = document.querySelectorAll('.certificate-content-wrapper');
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        function openCryptoModal() {
+            document.getElementById('cryptoModal').classList.add('active');
+        }
         
-        certificateTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetCert = tab.getAttribute('data-cert');
-                
-                // Remove active class from all tabs and wrappers
-                certificateTabs.forEach(t => t.classList.remove('active'));
-                certificateWrappers.forEach(w => w.classList.remove('active'));
-                
-                // Add active class to clicked tab and corresponding wrapper
-                tab.classList.add('active');
-                document.getElementById(targetCert).classList.add('active');
+        function closeCryptoModal() {
+            document.getElementById('cryptoModal').classList.remove('active');
+        }
+
+        function openFiatModal() {
+            document.getElementById('fiatModal').classList.add('active');
+        }
+        
+        function closeFiatModal() {
+            document.getElementById('fiatModal').classList.remove('active');
+        }
+
+        function copyAddress() {
+            const address = document.getElementById('walletAddress').textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                alert(currentLang === 'zh' ? '錢包地址已複製！' : 'Wallet address copied!');
             });
-        });
-        
-        // Certificate modal functionality
-        const modals = document.querySelectorAll('.certificate-modal');
-        const modalBtns = document.querySelectorAll('[data-modal-btn]');
-        const modalCloseBtns = document.querySelectorAll('[data-close]');
-        
-        modalBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const modalId = btn.getAttribute('data-modal-btn') + 'Modal';
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('mobileMenu').classList.remove('active');
                 }
             });
         });
-        
-        modalCloseBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const modalId = btn.getAttribute('data-close') + 'Modal';
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            });
-        });
-        
-        // Close modal when clicking outside
-        modals.forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            });
-        });
-        
-        // Add random data streams
-        function createDataStreams() {
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const stream = document.createElement('div');
-                    stream.className = 'data-stream';
-                    stream.style.left = Math.random() * 100 + '%';
-                    stream.style.animationDelay = Math.random() * 2 + 's';
-                    document.body.appendChild(stream);
-                    
-                    // Remove after animation
-                    setTimeout(() => {
-                        stream.remove();
-                    }, 4000);
-                }, i * 3000);
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
             }
         }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Start data streams
-            createDataStreams();
-            setInterval(createDataStreams, 15000);
-        });
+
+        let participating = 350;
+        setInterval(() => {
+            if (participating < 1000 && Math.random() > 0.7) {
+                participating += Math.floor(Math.random() * 3) + 1;
+                document.querySelectorAll('#participating, #participating2, #participating-en, #participating-en2').forEach(el => {
+                    el.textContent = participating;
+                });
+            }
+        }, 5000);
     </script>
 </body>
 </html>
