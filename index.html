@@ -1633,30 +1633,48 @@
                         <span class="lang-en">Choose your preferred payment currency (USD, HKD, CNY, JPY), click the payment button, and complete payment through the link.</span>
                     </p>
                     
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                        <a href="https://wise.com/pay/business/uj6hyy?currency=USD&amount=518.18&description=AIF-USD" target="_blank" style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; text-decoration: none; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(255, 215, 0, 0.2)'; this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(255, 215, 0, 0.1)'; this.style.borderColor='rgba(255, 215, 0, 0.3)'">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💵</div>
-                            <div style="font-weight: 700; color: white; margin-bottom: 0.3rem;"><span class="lang-zh active">美元支付</span><span class="lang-en">USD Payment</span></div>
-                            <div style="color: var(--accent); font-size: 0.9rem;">$518.18</div>
-                        </a>
-                        
-                        <a href="https://wise.com/pay/business/uj6hyy?currency=HKD&amount=4026&description=AIF-HKD" target="_blank" style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; text-decoration: none; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(255, 215, 0, 0.2)'; this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(255, 215, 0, 0.1)'; this.style.borderColor='rgba(255, 215, 0, 0.3)'">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇭🇰</div>
-                            <div style="font-weight: 700; color: white; margin-bottom: 0.3rem;"><span class="lang-zh active">港元支付</span><span class="lang-en">HKD Payment</span></div>
-                            <div style="color: var(--accent); font-size: 0.9rem;">HK$4,026</div>
-                        </a>
-                        
-                        <a href="https://wise.com/pay/business/uj6hyy?currency=CNY&amount=3690&description=AIF-CNY" target="_blank" style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; text-decoration: none; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(255, 215, 0, 0.2)'; this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(255, 215, 0, 0.1)'; this.style.borderColor='rgba(255, 215, 0, 0.3)'">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇨🇳</div>
-                            <div style="font-weight: 700; color: white; margin-bottom: 0.3rem;"><span class="lang-zh active">人民幣支付</span><span class="lang-en">CNY Payment</span></div>
-                            <div style="color: var(--accent); font-size: 0.9rem;">¥3,690</div>
-                        </a>
-                        
-                        <a href="https://wise.com/pay/business/uj6hyy?currency=JPY&amount=79214&description=AIF-JPY" target="_blank" style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; text-decoration: none; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(255, 215, 0, 0.2)'; this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(255, 215, 0, 0.1)'; this.style.borderColor='rgba(255, 215, 0, 0.3)'">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇯🇵</div>
-                            <div style="font-weight: 700; color: white; margin-bottom: 0.3rem;"><span class="lang-zh active">日元支付</span><span class="lang-en">JPY Payment</span></div>
-                            <div style="color: var(--accent); font-size: 0.9rem;">¥79,214</div>
-                        </a>
+                    <!-- 加密貨幣支付選項 -->
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.2rem;" class="lang-zh active">加密貨幣支付</h4>
+                        <h4 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.2rem;" class="lang-en">Cryptocurrency Payment</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <a href="#" onclick="openCryptoModal()" style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; text-decoration: none; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(255, 215, 0, 0.2)'; this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(255, 215, 0, 0.1)'; this.style.borderColor='rgba(255, 215, 0, 0.3)'">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">₿</div>
+                                <div style="font-weight: 700; color: white; margin-bottom: 0.3rem;"><span class="lang-zh active">加密貨幣支付</span><span class="lang-en">Crypto Payment</span></div>
+                                <div style="color: var(--accent); font-size: 0.9rem;">USDT / USDC</div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 法定貨幣支付選項 -->
+                    <div>
+                        <h4 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.2rem;" class="lang-zh active">法定貨幣支付</h4>
+                        <h4 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.2rem;" class="lang-en">Fiat Currency Payment</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <a href="https://wise.com/pay/business/uj6hyy?currency=USD&amount=518.18&description=AIF-USD" target="_blank" style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; text-decoration: none; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(255, 215, 0, 0.2)'; this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(255, 215, 0, 0.1)'; this.style.borderColor='rgba(255, 215, 0, 0.3)'">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💵</div>
+                                <div style="font-weight: 700; color: white; margin-bottom: 0.3rem;"><span class="lang-zh active">美元支付</span><span class="lang-en">USD Payment</span></div>
+                                <div style="color: var(--accent); font-size: 0.9rem;">$518.18</div>
+                            </a>
+                            
+                            <a href="https://wise.com/pay/business/uj6hyy?currency=HKD&amount=4026&description=AIF-HKD" target="_blank" style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; text-decoration: none; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(255, 215, 0, 0.2)'; this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(255, 215, 0, 0.1)'; this.style.borderColor='rgba(255, 215, 0, 0.3)'">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇭🇰</div>
+                                <div style="font-weight: 700; color: white; margin-bottom: 0.3rem;"><span class="lang-zh active">港元支付</span><span class="lang-en">HKD Payment</span></div>
+                                <div style="color: var(--accent); font-size: 0.9rem;">HK$4,026</div>
+                            </a>
+                            
+                            <a href="https://wise.com/pay/business/uj6hyy?currency=CNY&amount=3690&description=AIF-CNY" target="_blank" style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; text-decoration: none; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(255, 215, 0, 0.2)'; this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(255, 215, 0, 0.1)'; this.style.borderColor='rgba(255, 215, 0, 0.3)'">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇨🇳</div>
+                                <div style="font-weight: 700; color: white; margin-bottom: 0.3rem;"><span class="lang-zh active">人民幣支付</span><span class="lang-en">CNY Payment</span></div>
+                                <div style="color: var(--accent); font-size: 0.9rem;">¥3,690</div>
+                            </a>
+                            
+                            <a href="https://wise.com/pay/business/uj6hyy?currency=JPY&amount=79214&description=AIF-JPY" target="_blank" style="padding: 1rem; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; text-decoration: none; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(255, 215, 0, 0.2)'; this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(255, 215, 0, 0.1)'; this.style.borderColor='rgba(255, 215, 0, 0.3)'">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇯🇵</div>
+                                <div style="font-weight: 700; color: white; margin-bottom: 0.3rem;"><span class="lang-zh active">日元支付</span><span class="lang-en">JPY Payment</span></div>
+                                <div style="color: var(--accent); font-size: 0.9rem;">¥79,214</div>
+                            </a>
+                        </div>
                     </div>
                     
                     <!-- 手續費說明 -->
@@ -1792,12 +1810,33 @@
             <p style="color: #aaa; margin-bottom: 1rem; font-size: 0.95rem;" class="lang-en">Please send USDT or USDC to the following Solana wallet address:</p>
             <p style="font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem;" class="lang-zh active">Solana 錢包地址：</p>
             <p style="font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem;" class="lang-en">Solana Wallet Address:</p>
-            <div class="wallet-address" id="walletAddress">3QBgQiHC743ER9beX74bp8K7xrURQR2t5myfcG6tSTLv</div>
-            <button class="btn btn-primary" onclick="copyAddress()" style="width: 100%; margin-top: 1rem;">
+            <div class="wallet-address" id="solanaAddress">3QBgQiHC743ER9beX74bp8K7xrURQR2t5myfcG6tSTLv</div>
+            <button class="btn btn-primary" onclick="copyAddress('solanaAddress')" style="width: 100%; margin-top: 1rem;">
                 <i class="fas fa-copy"></i> 
-                <span class="lang-zh active">複製錢包地址</span>
-                <span class="lang-en">Copy Wallet Address</span>
+                <span class="lang-zh active">複製Solana錢包地址</span>
+                <span class="lang-en">Copy Solana Wallet Address</span>
             </button>
+            
+            <p style="color: #aaa; margin-top: 1.5rem; margin-bottom: 1rem; font-size: 0.95rem;" class="lang-zh active">或發送到幣安錢包地址：</p>
+            <p style="color: #aaa; margin-top: 1.5rem; margin-bottom: 1rem; font-size: 0.95rem;" class="lang-en">Or send to Binance wallet address:</p>
+            <p style="font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem;" class="lang-zh active">幣安錢包地址：</p>
+            <p style="font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem;" class="lang-en">Binance Wallet Address:</p>
+            <div class="wallet-address" id="binanceAddress">0xc059dc798ec9f31e765d9cccffd2c62b993857c9</div>
+            <button class="btn btn-primary" onclick="copyAddress('binanceAddress')" style="width: 100%; margin-top: 1rem;">
+                <i class="fas fa-copy"></i> 
+                <span class="lang-zh active">複製幣安錢包地址</span>
+                <span class="lang-en">Copy Binance Wallet Address</span>
+            </button>
+            
+            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 0, 0, 0.1); border-radius: 10px; border-left: 4px solid #ff4444;">
+                <p style="color: #ff4444; margin-bottom: 0.5rem; font-weight: 700; font-size: 0.9rem;" class="lang-zh active">⚠️ 重要提示：請務必核對網絡選擇</p>
+                <p style="color: #ff4444; margin-bottom: 0.5rem; font-weight: 700; font-size: 0.9rem;" class="lang-en">⚠️ Important: Please verify the network selection</p>
+                <p style="color: #ff4444; margin-bottom: 0.5rem; font-size: 0.85rem;" class="lang-zh active">網絡：BSC BNB Smart Chain (BEP20)</p>
+                <p style="color: #ff4444; margin-bottom: 0.5rem; font-size: 0.85rem;" class="lang-en">Network: BSC BNB Smart Chain (BEP20)</p>
+                <p style="color: #ff4444; margin-bottom: 0; font-size: 0.85rem;" class="lang-zh active">請注意,這裡僅展示了幣安平台所支持的充幣網絡,如果您使用幣安不支持的網絡充幣,將可能導致資產損失。</p>
+                <p style="color: #ff4444; margin-bottom: 0; font-size: 0.85rem;" class="lang-en">Please note, only the deposit networks supported by Binance are shown. Using an unsupported network may result in loss of assets.</p>
+            </div>
+            
             <p style="margin-top: 1.5rem; color: #aaa; font-size: 0.9rem; padding: 1rem; background: rgba(0,255,157,0.1); border-radius: 10px; border-left: 4px solid var(--accent); line-height: 1.7;">
                 <span class="lang-zh active">💡 支付完成後，請將交易收據和您的 Solana 錢包地址發送至 <strong style="color: var(--accent);">Genesis@aif.market</strong></span>
                 <span class="lang-en">💡 After payment, please send transaction receipt and your Solana wallet address to <strong style="color: var(--accent);">Genesis@aif.market</strong></span>
@@ -1911,8 +1950,8 @@
             document.getElementById('fiatModal').classList.remove('active');
         }
 
-        function copyAddress() {
-            const address = document.getElementById('walletAddress').textContent;
+        function copyAddress(elementId) {
+            const address = document.getElementById(elementId).textContent;
             navigator.clipboard.writeText(address).then(() => {
                 alert(currentLang === 'zh' ? '錢包地址已複製！' : 'Wallet address copied!');
             });
